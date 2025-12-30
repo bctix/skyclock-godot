@@ -22,6 +22,7 @@ boot_splash/use_filter=false
 
 SkyEvent="*res://Scripts/AutoLoad/SkyEvents.gd"
 GlobalSetting="*res://Scripts/AutoLoad/GlobalSettings.gd"
+ConstantVars="*res://Scripts/AutoLoad/Constants.gd"
 
 [display]
 

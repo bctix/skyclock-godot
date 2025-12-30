@@ -5,6 +5,7 @@ func _ready():
 	$"Control/Background/24hr_toggle".button_pressed = GlobalSettings.TWENTY_FOUR_HR_MODE
 	var tween = create_tween()
 	tween.tween_property($Control, "modulate:a", 1.0, 0.5).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	$Control/Background/actualversion.text = Constants.VERSION
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false

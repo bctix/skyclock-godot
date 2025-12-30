@@ -220,6 +220,48 @@ rotation = 0.45199394
 scale = Vector2(0.6182461, 0.6182461)
 texture = ExtResource("8_3n4xg")
 
+[node name="version" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 174.0
+offset_right = 382.0
+offset_bottom = 206.0
+rotation = 0.15052265
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("6_51tso")
+theme_override_font_sizes/font_size = 21
+text = "version:"
+horizontal_alignment = 1
+
+[node name="actualversion" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 246.99998
+offset_top = 197.99998
+offset_right = 383.0
+offset_bottom = 229.99998
+rotation = 0.06474731
+scale = Vector2(0.892018, 1.3743738)
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("6_51tso")
+theme_override_font_sizes/font_size = 21
+text = "0.0.0"
+horizontal_alignment = 1
+
+[node name="warning" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 70.00001
+offset_top = 122.0
+offset_right = 206.0
+offset_bottom = 177.0
+rotation = -0.07023923
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("6_51tso")
+theme_override_font_sizes/font_size = 11
+text = "does not save
+(yet)
+(sorry)"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
 [connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
