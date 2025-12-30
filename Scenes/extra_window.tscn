@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://e4q0q0byc1ni"]
+
+[ext_resource type="Script" uid="uid://bw4s85j6ci4y3" path="res://Scripts/extra_window.gd" id="1_nl6hp"]
+[ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="2_08vnm"]
+[ext_resource type="Texture2D" uid="uid://dohubpls5rx2l" path="res://Assets/Images/icons8-move-50.png" id="3_dghav"]
+[ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="4_tns7o"]
+[ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="5_51tso"]
+[ext_resource type="FontFile" uid="uid://bt3trnspmwel0" path="res://Assets/Fonts/Lato-Regular.ttf" id="6_51tso"]
+[ext_resource type="FontFile" uid="uid://dgwowtscbpkq8" path="res://Assets/Fonts/Lato-Bold.ttf" id="7_3n4xg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
+bg_color = Color(0, 0, 0, 0.52156866)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ExtraWindow" type="Window"]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(448, 256)
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("1_nl6hp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 448.0
+offset_bottom = 256.0
+
+[node name="Background" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 248.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3n4xg")
+
+[node name="CloseButton" type="TextureButton" parent="Control/Background"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_08vnm")
+
+[node name="DragButton" type="TextureButton" parent="Control/Background"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 98.0
+offset_bottom = 58.0
+texture_normal = ExtResource("3_dghav")
+
+[node name="TitleLabel" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 8.0
+offset_right = 316.0
+offset_bottom = 58.0
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("5_51tso")
+theme_override_font_sizes/font_size = 41
+text = "SkyExtras"
+horizontal_alignment = 1
+
+[node name="created" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 97.19865
+offset_right = 311.0
+offset_bottom = 129.19864
+rotation = -0.1193911
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("6_51tso")
+theme_override_font_sizes/font_size = 26
+text = "created by"
+horizontal_alignment = 1
+
+[node name="created2" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 123.19864
+offset_right = 309.0
+offset_bottom = 155.19864
+rotation = 0.06621765
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 26
+text = "bctix"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
+[connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
