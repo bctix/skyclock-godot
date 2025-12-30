@@ -17,7 +17,6 @@ static func seconds_until(key: String, utc_second: int) -> int:
 	while next < 0: next += period
 	return next
 	
-
 static func closest_event(now_sec: int) -> Dictionary:
 	var best := { "key":"", "sec":999999 }
 	for key in DATA:

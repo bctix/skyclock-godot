@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://xsheoeofap12" path="res://Assets/Images/icons8-gear-32.png" id="8_p20v8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cwwx"]
-bg_color = Color(0, 0, 0, 0.52156866)
+bg_color = Color(0, 0, 0, 0.6039216)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -48,6 +48,7 @@ text = "SkyClock"
 layout_mode = 1
 
 [node name="CloseButton" type="TextureButton" parent="."]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
@@ -56,6 +57,7 @@ offset_bottom = 48.0
 texture_normal = ExtResource("2_w45st")
 
 [node name="DragButton" type="TextureButton" parent="."]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 64.0
 offset_top = 16.0
@@ -64,12 +66,14 @@ offset_bottom = 66.0
 texture_normal = ExtResource("6_0s767")
 
 [node name="IxSvg" type="Sprite2D" parent="."]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 position = Vector2(316, 24.000004)
 rotation = 0.2617994
 scale = Vector2(0.019999998, 0.019999998)
 texture = ExtResource("7_kglov")
 
 [node name="SettingsButton" type="TextureButton" parent="."]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 400.0
 offset_top = 16.0

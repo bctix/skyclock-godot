@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://e4q0q0byc1ni"]
+[gd_scene load_steps=10 format=3 uid="uid://e4q0q0byc1ni"]
 
 [ext_resource type="Script" uid="uid://bw4s85j6ci4y3" path="res://Scripts/extra_window.gd" id="1_nl6hp"]
 [ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="2_08vnm"]
@@ -7,9 +7,10 @@
 [ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="5_51tso"]
 [ext_resource type="FontFile" uid="uid://bt3trnspmwel0" path="res://Assets/Fonts/Lato-Regular.ttf" id="6_51tso"]
 [ext_resource type="FontFile" uid="uid://dgwowtscbpkq8" path="res://Assets/Fonts/Lato-Bold.ttf" id="7_3n4xg"]
+[ext_resource type="Texture2D" uid="uid://d1yb0n67qcd7o" path="res://Assets/Images/heart.svg" id="8_3n4xg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
-bg_color = Color(0, 0, 0, 0.52156866)
+bg_color = Color(0, 0, 0, 0.6039216)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -18,8 +19,8 @@ corner_radius_bottom_left = 20
 [node name="ExtraWindow" type="Window"]
 transparent_bg = true
 oversampling_override = 1.0
-initial_position = 1
 size = Vector2i(448, 256)
+unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
@@ -40,6 +41,7 @@ offset_bottom = 248.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3n4xg")
 
 [node name="CloseButton" type="TextureButton" parent="Control/Background"]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -48,6 +50,7 @@ offset_bottom = 40.0
 texture_normal = ExtResource("2_08vnm")
 
 [node name="DragButton" type="TextureButton" parent="Control/Background"]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 48.0
 offset_top = 8.0
@@ -93,6 +96,131 @@ theme_override_font_sizes/font_size = 26
 text = "bctix"
 horizontal_alignment = 1
 
+[node name="created3" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 149.19864
+offset_right = 156.0
+offset_bottom = 181.19864
+rotation = 0.15052265
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("6_51tso")
+theme_override_font_sizes/font_size = 26
+text = "powered by"
+horizontal_alignment = 1
+
+[node name="created4" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 175.19864
+offset_right = 154.0
+offset_bottom = 207.19864
+rotation = 0.5283023
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 26
+text = "godot"
+horizontal_alignment = 1
+
+[node name="24hr_toggle" type="CheckButton" parent="Control/Background"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 119.0
+offset_right = 112.0
+offset_bottom = 143.0
+rotation = 0.4330172
+
+[node name="created5" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 98.00001
+offset_right = 156.0
+offset_bottom = 130.0
+rotation = -0.10001111
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 26
+text = "24hr mode"
+horizontal_alignment = 1
+
+[node name="h" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 320.99997
+offset_top = 118.0
+offset_right = 352.99997
+offset_bottom = 186.0
+rotation = -0.1193911
+theme = ExtResource("4_tns7o")
+theme_override_colors/font_color = Color(0.39215687, 1, 0.2784314, 1)
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 56
+text = "h"
+horizontal_alignment = 1
+
+[node name="i" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 353.00003
+offset_top = 118.00001
+offset_right = 385.00003
+offset_bottom = 186.0
+rotation = 0.09710254
+theme = ExtResource("4_tns7o")
+theme_override_colors/font_color = Color(0.83406585, 0.0003817731, 0.79623044, 1)
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 56
+text = "i"
+horizontal_alignment = 1
+
+[node name="!" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 362.0
+offset_top = 118.00001
+offset_right = 394.0
+offset_bottom = 186.0
+rotation = -0.08194086
+theme = ExtResource("4_tns7o")
+theme_override_colors/font_color = Color(0.45772868, 0.19980612, 0, 1)
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 56
+text = "!"
+horizontal_alignment = 1
+
+[node name="!2" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 379.00006
+offset_top = 111.0
+offset_right = 411.00006
+offset_bottom = 179.0
+rotation = -0.05559462
+theme = ExtResource("4_tns7o")
+theme_override_colors/font_color = Color(0.39215687, 1, 0.2784314, 1)
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 56
+text = "!"
+horizontal_alignment = 1
+
+[node name="!3" type="Label" parent="Control/Background"]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 117.0
+offset_right = 421.0
+offset_bottom = 185.0
+rotation = -0.22386442
+theme = ExtResource("4_tns7o")
+theme_override_colors/font_color = Color(0.8352941, 0, 0.79607844, 1)
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 56
+text = "!"
+horizontal_alignment = 1
+
+[node name="Heart" type="Sprite2D" parent="Control/Background"]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+position = Vector2(148, 220)
+rotation = 0.45199394
+scale = Vector2(0.6182461, 0.6182461)
+texture = ExtResource("8_3n4xg")
+
 [connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
 [connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
+[connection signal="toggled" from="Control/Background/24hr_toggle" to="." method="_on_hr_toggle_toggled"]

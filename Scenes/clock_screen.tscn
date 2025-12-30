@@ -16,9 +16,9 @@ script = ExtResource("1_n2tin")
 
 [node name="local_time_label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 72.0
 offset_top = 88.0
-offset_right = 380.0
+offset_right = 372.0
 offset_bottom = 147.0
 pivot_offset = Vector2(150, 25)
 theme = ExtResource("1_0ngfe")
@@ -50,5 +50,5 @@ pivot_offset = Vector2(150, 25)
 theme = ExtResource("1_0ngfe")
 theme_override_fonts/font = ExtResource("2_n2tin")
 theme_override_font_sizes/font_size = 28
-text = "Time till {event}: "
+text = "event till event :D"
 horizontal_alignment = 1

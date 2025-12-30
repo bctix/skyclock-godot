@@ -1,8 +1,10 @@
 extends Window
 
 func _ready():
-	$Control/Background/CloseButton.self_modulate = Color(0.898, 0.871, 0.812, 1.0)
-	$Control/Background/DragButton.self_modulate = Color(0.898, 0.871, 0.812, 1.0)
+	$Control.modulate.a = 0
+	$"Control/Background/24hr_toggle".button_pressed = GlobalSettings.TWENTY_FOUR_HR_MODE
+	var tween = create_tween()
+	tween.tween_property($Control, "modulate:a", 1.0, 0.5).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false
@@ -25,7 +27,10 @@ func _on_close_button_pressed() -> void:
 	if not closing:
 		closing = true
 		var tween = create_tween()
-		tween.tween_property($Control, "modulate:a", 0.0, 0.5).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property($Control, "modulate:a", 0.0, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		self.queue_free()
 	pass # Replace with function body.
+
+func _on_hr_toggle_toggled(toggled_on: bool) -> void:
+	GlobalSettings.TWENTY_FOUR_HR_MODE = toggled_on

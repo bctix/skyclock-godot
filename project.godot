@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SkyEvent="*res://Scripts/AutoLoad/SkyEvents.gd"
+GlobalSetting="*res://Scripts/AutoLoad/GlobalSettings.gd"
 
 [display]
 
@@ -29,6 +30,7 @@ window/size/viewport_width=448
 window/size/viewport_height=256
 window/size/initial_position_type=0
 window/size/initial_position=Vector2i(-4000, 0)
+window/size/resizable=false
 window/size/borderless=true
 window/size/always_on_top=true
 window/size/transparent=true

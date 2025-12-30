@@ -12,23 +12,35 @@ func get_next_event_string() -> String:
 	return "%s  %s" % [SkyEvents.DATA[ev.key].prefix, pretty_format(ev.sec)]
 
 func get_local_time_string() -> String:
-	var t = Time.get_time_dict_from_system()
-	var h = t.hour
-	var suffix = "am" if h < 12 else "pm"
-	h = h % 12
-	if h == 0: h = 12
-	var time = "%d:%02d:%02d %s" % [h, t.minute, t.second, suffix]
-	return time
+	if GlobalSettings.TWENTY_FOUR_HR_MODE:
+		var t = Time.get_time_dict_from_system()
+		var time = "%d:%02d:%02d" % [t.hour, t.minute, t.second]
+		return time
+	else:
+		var t = Time.get_time_dict_from_system()
+		var h = t.hour
+		var suffix = "am" if h < 12 else "pm"
+		h = h % 12
+		if h == 0: h = 12
+		var time = "%d:%02d:%02d %s" % [h, t.minute, t.second, suffix]
+		return time
 
 func get_sky_time_string() -> String:
-	var utc_unix = Time.get_unix_time_from_system()
-	var la_unix = utc_unix - 8 * 3600
-	var t = Time.get_datetime_dict_from_unix_time(int(la_unix))
-	var h = t.hour % 12
-	var suffix = "am" if t.hour < 12 else "pm"
-	if h == 0: h = 12
-	var time = "%d:%02d:%02d %s" % [h, t.minute, t.second, suffix]
-	return time
+	if GlobalSettings.TWENTY_FOUR_HR_MODE:
+		var utc_unix = Time.get_unix_time_from_system()
+		var la_unix = utc_unix - 8 * 3600
+		var t = Time.get_datetime_dict_from_unix_time(int(la_unix))
+		var time = "%d:%02d:%02d" % [t.hour, t.minute, t.second]
+		return time
+	else:
+		var utc_unix = Time.get_unix_time_from_system()
+		var la_unix = utc_unix - 8 * 3600
+		var t = Time.get_datetime_dict_from_unix_time(int(la_unix))
+		var h = t.hour % 12
+		var suffix = "am" if t.hour < 12 else "pm"
+		if h == 0: h = 12
+		var time = "%d:%02d:%02d %s" % [h, t.minute, t.second, suffix]
+		return time
 
 func pretty_format(sec: int) -> String:
 	sec = max(0, sec)          # never negative

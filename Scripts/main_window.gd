@@ -12,10 +12,6 @@ func start_up():
 	var window_size = get_window().size
 	var bottom_left_position = Vector2(60, screen_size.y - window_size.y + 140) # Adjust -30 as needed
 	get_window().position = Vector2i(bottom_left_position.x - 400, bottom_left_position.y + 400)
-	$CloseButton.self_modulate = Color(0.898, 0.871, 0.812, 1.0)
-	$DragButton.self_modulate = Color(0.898, 0.871, 0.812, 1.0)
-	$IxSvg.self_modulate = Color(0.898, 0.871, 0.812, 1.0)
-	$SettingsButton.self_modulate = Color(0.898, 0.871, 0.812, 1.0)
 	await get_tree().create_timer(0.8).timeout
 	var tween = create_tween()
 	tween.set_parallel(true)
@@ -41,9 +37,13 @@ func _on_drag_button_button_up() -> void:
 	drag_offset = Vector2.ZERO
 
 func _on_settings_button_pressed() -> void:
-	print("rtuiuiopnesuiopbergpouhneragopnuje")
-	extra_window_instance = extra_window.instantiate()
-	add_child(extra_window_instance)
+	if extra_window_instance == null:
+		extra_window_instance = extra_window.instantiate()
+		extra_window_instance.position = get_window().position
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(extra_window_instance, "position:y", get_window().position.y - extra_window_instance.size.y, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		add_child(extra_window_instance)
 	pass # Replace with function body.
 
 var closing = false
