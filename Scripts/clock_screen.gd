@@ -9,7 +9,7 @@ func get_next_event_string() -> String:
 	var key = "geyser"
 	@warning_ignore("narrowing_conversion")
 	var ev = SkyEvents.closest_event(Time.get_unix_time_from_system())
-	return "%s  %s" % [SkyEvents.DATA[ev.key].prefix, pretty_format(ev.sec)]
+	return "%s %s" % [SkyEvents.DATA[ev.key].prefix, pretty_format(ev.sec)]
 
 func get_local_time_string() -> String:
 	if GlobalSettings.TWENTY_FOUR_HR_MODE:

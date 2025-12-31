@@ -19,6 +19,7 @@ corner_radius_bottom_left = 20
 [node name="ExtraWindow" type="Window"]
 transparent_bg = true
 oversampling_override = 1.0
+title = "SkyExtras"
 size = Vector2i(448, 256)
 unresizable = true
 borderless = true
@@ -262,7 +263,15 @@ text = "does not save
 (sorry)"
 horizontal_alignment = 1
 
+[node name="funnybutton" type="TextureButton" parent="Control/Background"]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 18.0
+offset_right = 409.0
+offset_bottom = 58.0
+
 [connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
 [connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
 [connection signal="toggled" from="Control/Background/24hr_toggle" to="." method="_on_hr_toggle_toggled"]
+[connection signal="pressed" from="Control/Background/funnybutton" to="." method="_on_funnybutton_pressed"]

@@ -1,17 +1,12 @@
 extends Window
 
-var funny_window = preload("res://Scenes/funny.tscn")
-var funny_window_instance = null
-
 func _ready():
 	$Control.modulate.a = 0
-	$"Control/Background/24hr_toggle".button_pressed = GlobalSettings.TWENTY_FOUR_HR_MODE
-	$Control.position.y = $Control.size.y
+	$Control.position.x -= $Control.size.x
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property($Control, "modulate:a", 1.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($Control, "position:y", 0.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	$Control/Background/actualversion.text = Constants.VERSION
+	tween.tween_property($Control, "position:x", 0.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false
@@ -37,14 +32,4 @@ func _on_close_button_pressed() -> void:
 		tween.tween_property($Control, "modulate:a", 0.0, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		self.queue_free()
-	pass # Replace with function body.
-
-func _on_hr_toggle_toggled(toggled_on: bool) -> void:
-	GlobalSettings.TWENTY_FOUR_HR_MODE = toggled_on
-
-func _on_funnybutton_pressed() -> void:
-	if funny_window_instance == null:
-		funny_window_instance = funny_window.instantiate()
-		funny_window_instance.position = Vector2i(get_window().position.x, get_window().position.y - funny_window_instance.size.y)
-		add_child(funny_window_instance)
 	pass # Replace with function body.

@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://1rbdxspv2ctm"]
+
+[ext_resource type="Script" uid="uid://c2643dgay1q4g" path="res://Scripts/shard_window.gd" id="1_vk6mx"]
+[ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="2_5d4yk"]
+[ext_resource type="PackedScene" uid="uid://dmmclqwpnpub3" path="res://Scenes/shard_screen.tscn" id="2_vk6mx"]
+[ext_resource type="Texture2D" uid="uid://dohubpls5rx2l" path="res://Assets/Images/icons8-move-50.png" id="3_x8egy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
+bg_color = Color(0, 0, 0, 0.6039216)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ExtraWindow" type="Window"]
+transparent_bg = true
+oversampling_override = 1.0
+title = "SkyExtras"
+size = Vector2i(448, 256)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("1_vk6mx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 448.0
+offset_bottom = 256.0
+
+[node name="Background" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 248.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3n4xg")
+
+[node name="ShardScreen" parent="Control/Background" instance=ExtResource("2_vk6mx")]
+layout_mode = 1
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="CloseButton" type="TextureButton" parent="Control/Background"]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_5d4yk")
+
+[node name="DragButton" type="TextureButton" parent="Control/Background"]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 98.0
+offset_bottom = 58.0
+texture_normal = ExtResource("3_x8egy")
+
+[connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
+[connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]

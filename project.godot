@@ -17,6 +17,8 @@ boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
+config/icon="uid://cxgqgjeme710l"
+config/windows_native_icon="res://Assets/Images/IX Sky.ico"
 
 [autoload]
 

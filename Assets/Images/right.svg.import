@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxgqgjeme710l"
-path.s3tc="res://.godot/imported/IX-SVG.svg-c9334568a66585399468f0a2705f1187.s3tc.ctex"
+uid="uid://dvhxa2xgujwes"
+path="res://.godot/imported/right.svg-54e95c80edc62e0f285a58f47137a0ff.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/IX-SVG.svg"
-dest_files=["res://.godot/imported/IX-SVG.svg-c9334568a66585399468f0a2705f1187.s3tc.ctex"]
+source_file="res://Assets/Images/right.svg"
+dest_files=["res://.godot/imported/right.svg-54e95c80edc62e0f285a58f47137a0ff.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,7 +37,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0yhbb4kywbls"]
+[gd_scene load_steps=5 format=3 uid="uid://b0yhbb4kywbls"]
 
 [ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="1_0ngfe"]
 [ext_resource type="Script" uid="uid://c18geepxvkt80" path="res://Scripts/clock_screen.gd" id="1_n2tin"]
 [ext_resource type="FontFile" uid="uid://bt3trnspmwel0" path="res://Assets/Fonts/Lato-Regular.ttf" id="2_n2tin"]
+[ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="4_7tlwj"]
 
 [node name="ClockScreen" type="Control"]
 layout_mode = 3
@@ -50,5 +51,16 @@ pivot_offset = Vector2(150, 25)
 theme = ExtResource("1_0ngfe")
 theme_override_fonts/font = ExtResource("2_n2tin")
 theme_override_font_sizes/font_size = 28
-text = "event till event :D"
+text = "time till event :D"
 horizontal_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 66.0
+theme = ExtResource("1_0ngfe")
+theme_override_fonts/font = ExtResource("4_7tlwj")
+theme_override_font_sizes/font_size = 41
+text = "SkyClock"
