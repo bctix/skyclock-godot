@@ -7,6 +7,9 @@
 export.cfg
 export_credentials.cfg
 
+# my export file lol
+bin/
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 
