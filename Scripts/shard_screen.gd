@@ -37,8 +37,17 @@ const lang = {
 	},
 }
 
+func _ready() -> void:
+	set_colors()
+	Config.value_changed.connect(conf_changed)
+
+func conf_changed(section: String, key: String, _value) -> void:
+	if section == "global" and key == "color":
+		set_colors()
+
 func _process(_delta):
-	var today_shard_info = SkyEvents.shard_for(Time.get_datetime_string_from_system())
+	var sky_time = Timezone.get_sky_datetime_string_from_unix_time()
+	var today_shard_info = SkyEvents.shard_for(sky_time)
 	if today_shard_info.is_red:
 		$ShardInfo.modulate = Color("d96f6f")
 	else:
@@ -49,30 +58,25 @@ func _process(_delta):
 	$ShardTimeInfo.text = process_shard_time(today_shard_info)
 
 func process_shard_time(today_shard_info):
-	# ---- inline shard_timer ----
 	var now := Time.get_unix_time_from_system()
 	var base := Time.get_unix_time_from_datetime_string(Time.get_date_string_from_system() + "T00:00:00")
 	var meta = today_shard_info
 
-	# 1) look for active window
 	for occ in meta.occurrences:
 		var st = base + occ.start
 		var ed = base + occ.end
 		if st <= now and now < ed:
-			return "Current shard ends in " + pretty_format(ed - now)   # live countdown
+			print(pretty_format(occ.start))
+			return "Current shard ends in " + pretty_format(ed - now)
 
-	# 2) find next start
 	for occ in meta.occurrences:
-		var st = base + occ.start
-		if st > now:
-			return "Next shard landing in " + pretty_format(st - now)   # time till start
+		if occ.start > now:
+			return "Next shard landing in " + pretty_format(occ.start - now)
 
-	# 3) no more today
 	return "no more for today"
 
 var shard_day := ""
 var cached_info := {}
-
 
 func pretty_format(sec: int) -> String:
 	sec = int(sec)
@@ -84,3 +88,10 @@ func pretty_format(sec: int) -> String:
 	var out := "%02d:%02d:%02d" % [h, m, s]
 	if h == 0: out = out.substr(3)
 	return out
+
+func set_colors() -> void:
+	for node in $".".get_children():
+		if node is Label:
+			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
+		elif node is CanvasItem:
+			node.self_modulate = Config.get_value("global", "color")

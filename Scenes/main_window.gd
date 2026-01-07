@@ -7,6 +7,12 @@ var shard_window_instance = null
 
 func _ready():
 	start_up()
+	set_colors()
+	Config.value_changed.connect(conf_changed)
+
+func conf_changed(section: String, key: String, _value) -> void:
+	if section == "global" and key == "color":
+		set_colors()
 
 func start_up():
 	$".".modulate.a = 0
@@ -68,3 +74,10 @@ func _on_close_button_pressed() -> void:
 		await tween.finished
 		get_tree().quit()
 	pass # Replace with function body.
+
+func set_colors() -> void:
+	for node in $".".get_children():
+		if node is Label:
+			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
+		elif node is CanvasItem:
+			node.self_modulate = Config.get_value("global", "color")

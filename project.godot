@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="skyclock"
+config/version="1.0.1"
 run/main_scene="uid://doe7wryx4acnb"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 0)
@@ -23,8 +24,8 @@ config/windows_native_icon="res://Assets/Images/IX Sky.ico"
 [autoload]
 
 SkyEvent="*res://Scripts/AutoLoad/SkyEvents.gd"
-GlobalSetting="*res://Scripts/AutoLoad/GlobalSettings.gd"
-ConstantVars="*res://Scripts/AutoLoad/Constants.gd"
+Config="*res://Scripts/AutoLoad/Config.gd"
+Timezone="*res://Scripts/AutoLoad/Timezone.gd"
 
 [display]
 

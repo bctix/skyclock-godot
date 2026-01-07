@@ -1,19 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://doe7wryx4acnb"]
+[gd_scene load_steps=13 format=3 uid="uid://doe7wryx4acnb"]
 
-[ext_resource type="Script" uid="uid://cf34ph7ujqlal" path="res://Scripts/main_window.gd" id="1_6t6yy"]
+[ext_resource type="Script" uid="uid://cf34ph7ujqlal" path="res://Scenes/main_window.gd" id="1_6t6yy"]
+[ext_resource type="StyleBox" uid="uid://dgxfwqw34l3e0" path="res://Themes/default_stylebox.tres" id="2_p20v8"]
 [ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="2_w45st"]
-[ext_resource type="PackedScene" uid="uid://b0yhbb4kywbls" path="res://Scenes/clock_screen.tscn" id="5_qdbfq"]
+[ext_resource type="Script" uid="uid://c18geepxvkt80" path="res://Scripts/clock_screen.gd" id="3_36qhk"]
+[ext_resource type="AudioStream" uid="uid://cm7dxgtut8wmy" path="res://Assets/Sounds/ding.mp3" id="4_p8ock"]
+[ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="4_xvkfb"]
+[ext_resource type="FontFile" uid="uid://bt3trnspmwel0" path="res://Assets/Fonts/Lato-Regular.ttf" id="5_p8ock"]
 [ext_resource type="Texture2D" uid="uid://dohubpls5rx2l" path="res://Assets/Images/icons8-move-50.png" id="6_0s767"]
+[ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="6_hh1c1"]
 [ext_resource type="Texture2D" uid="uid://cxgqgjeme710l" path="res://Assets/Images/IX-SVG.svg" id="7_kglov"]
 [ext_resource type="Texture2D" uid="uid://dvhxa2xgujwes" path="res://Assets/Images/right.svg" id="7_p20v8"]
 [ext_resource type="Texture2D" uid="uid://xsheoeofap12" path="res://Assets/Images/icons8-gear-32.png" id="8_p20v8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cwwx"]
-bg_color = Color(0, 0, 0, 0.6039216)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
 
 [node name="MainWindow" type="Control"]
 layout_mode = 3
@@ -30,10 +28,66 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 440.0
 offset_bottom = 248.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_1cwwx")
+theme_override_styles/panel = ExtResource("2_p20v8")
 
-[node name="ClockScreen" parent="." instance=ExtResource("5_qdbfq")]
-layout_mode = 1
+[node name="ClockScreen" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_36qhk")
+
+[node name="Ding" type="AudioStreamPlayer" parent="ClockScreen"]
+stream = ExtResource("4_p8ock")
+
+[node name="local_time_label" type="Label" parent="ClockScreen"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 88.0
+offset_right = 372.0
+offset_bottom = 147.0
+pivot_offset = Vector2(150, 25)
+theme = ExtResource("4_xvkfb")
+theme_override_fonts/font = ExtResource("5_p8ock")
+theme_override_font_sizes/font_size = 48
+text = "00:00:00 PM"
+horizontal_alignment = 1
+
+[node name="sky_time_label" type="Label" parent="ClockScreen"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 147.0
+offset_right = 316.0
+offset_bottom = 188.0
+pivot_offset = Vector2(150, 25)
+theme = ExtResource("4_xvkfb")
+theme_override_fonts/font = ExtResource("5_p8ock")
+theme_override_font_sizes/font_size = 33
+text = "00:00:00 PM"
+horizontal_alignment = 1
+
+[node name="next_event_label" type="Label" parent="ClockScreen"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 201.0
+offset_right = 440.0
+offset_bottom = 242.0
+pivot_offset = Vector2(150, 25)
+theme = ExtResource("4_xvkfb")
+theme_override_fonts/font = ExtResource("5_p8ock")
+theme_override_font_sizes/font_size = 28
+text = "time till event :D"
+horizontal_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="ClockScreen"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 66.0
+theme = ExtResource("4_xvkfb")
+theme_override_fonts/font = ExtResource("6_hh1c1")
+theme_override_font_sizes/font_size = 41
+text = "SkyClock"
 
 [node name="CloseButton" type="TextureButton" parent="."]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
