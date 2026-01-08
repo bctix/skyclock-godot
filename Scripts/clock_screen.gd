@@ -21,21 +21,21 @@ func _process(_delta: float) -> void:
 	$next_event_label.text = get_next_event_string()
 	
 
-var last_checked_secs: int = -1
+#var last_checked_secs: int = -1
 func get_next_event_string() -> String:
 	var key = "geyser"
 	@warning_ignore("narrowing_conversion")
 	var ev = SkyEvents.closest_event(Time.get_unix_time_from_system())
 	
-	if last_checked_secs != -1:
-		@warning_ignore("integer_division")
-		var last_interval: int = last_checked_secs / 300
-		var current_interval = int(ev.sec / 300)
+	#if last_checked_secs != -1:
+		#@warning_ignore("integer_division")
+		#var last_interval: int = last_checked_secs / 300
+		#var current_interval = int(ev.sec / 300)
 
-		if last_interval > current_interval:
-			do_notif()
+		#if last_interval > current_interval:
+			#do_notif()
 
-	last_checked_secs = ev.sec
+	#last_checked_secs = ev.sec
 	
 	return "%s %s" % [SkyEvents.DATA[ev.key].prefix, pretty_format(ev.sec)]
 
