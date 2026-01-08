@@ -58,13 +58,16 @@ func _process(_delta):
 	$ShardTimeInfo.text = process_shard_time(today_shard_info)
 
 func process_shard_time(today_shard_info):
-	var now := Time.get_unix_time_from_system()
-	var base := Time.get_unix_time_from_datetime_string(Time.get_date_string_from_system() + "T00:00:00")
+	var now := Timezone.get_sky_unix_time_from_system()
+	var base := Time.get_unix_time_from_datetime_string(Timezone.get_sky_date_string_from_system() + "T00:00:00")
 	var meta = today_shard_info
 
 	for occ in meta.occurrences:
 		var st = base + occ.start
 		var ed = base + occ.end
+		print(st)
+		print(now)
+		print(ed)
 		if st <= now and now < ed:
 			print(pretty_format(occ.start))
 			return "Current shard ends in " + pretty_format(ed - now)
