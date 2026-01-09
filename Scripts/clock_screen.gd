@@ -21,27 +21,25 @@ func _process(_delta: float) -> void:
 	$next_event_label.text = get_next_event_string()
 	
 
-#var last_checked_secs: int = -1
+var did_notif: bool = false
 func get_next_event_string() -> String:
 	var key = "geyser"
-	@warning_ignore("narrowing_conversion")
-	var ev = SkyEvents.closest_event(Time.get_unix_time_from_system())
+	@warning_ignore("narrowing_conversion", "static_called_on_instance")
+	var ev = SkyWax.closest_event(Time.get_unix_time_from_system())
 	
-	#if last_checked_secs != -1:
-		#@warning_ignore("integer_division")
-		#var last_interval: int = last_checked_secs / 300
-		#var current_interval = int(ev.sec / 300)
+	if 300 == ev.sec:
+		if not did_notif:
+			do_notif()
+			did_notif = true
+	else:
+		did_notif = false
 
-		#if last_interval > current_interval:
-			#do_notif()
-
-	#last_checked_secs = ev.sec
-	
-	return "%s %s" % [SkyEvents.DATA[ev.key].prefix, pretty_format(ev.sec)]
+	return "%s %s" % [SkyWax.DATA[ev.key].prefix, pretty_format(ev.sec)]
 
 func do_notif() -> void:
 	if Config.get_value("clock", "notifications"):
-		$Ding.play()
+		$notif_animation.play("RESET")
+		$notif_animation.play("notif")
 
 func get_local_time_string() -> String:
 	if twenty_four_hr:
@@ -59,7 +57,7 @@ func get_local_time_string() -> String:
 
 func get_sky_time_string() -> String:
 	if twenty_four_hr:
-		var t = Timezone.get_sky_datetime_dict_from_unix_time()
+		var t = Timezone.get_sky_datetime_dict_from_unix_time(Time.get_unix_time_from_system())
 		var time = "%d:%02d:%02d" % [t.hour, t.minute, t.second]
 		return time
 	else:
@@ -86,6 +84,8 @@ func pretty_format(sec: int) -> String:
 func set_colors() -> void:
 	for node in $".".get_children():
 		if node is Label:
+			if node.name == "ShardInfo":
+				return
 			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
 		elif node is CanvasItem:
 			node.self_modulate = Config.get_value("global", "color")

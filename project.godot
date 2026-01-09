@@ -23,9 +23,10 @@ config/windows_native_icon="res://Assets/Images/IX Sky.ico"
 
 [autoload]
 
-SkyEvent="*res://Scripts/AutoLoad/SkyEvents.gd"
+SkyWax="*res://Scripts/AutoLoad/SkyWax.gd"
 Config="*res://Scripts/AutoLoad/Config.gd"
 Timezone="*res://Scripts/AutoLoad/Timezone.gd"
+SkyShard="*res://Scripts/AutoLoad/SkyShard.gd"
 
 [display]
 

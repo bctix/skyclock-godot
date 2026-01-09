@@ -59,28 +59,52 @@ text = "SkyShard"
 
 [node name="ShardInfo" type="Label" parent="Control/Background/ShardScreen"]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 16.0
 offset_top = 72.0
 offset_right = 416.0
-offset_bottom = 143.0
+offset_bottom = 184.0
 theme_override_fonts/font = ExtResource("5_x8egy")
 theme_override_font_sizes/font_size = 28
 text = "Black Shard in Location at Realm"
 horizontal_alignment = 1
 autowrap_mode = 3
+text_overrun_behavior = 5
 
 [node name="ShardTimeInfo" type="Label" parent="Control/Background/ShardScreen"]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 160.0
-offset_right = 400.0
-offset_bottom = 248.0
+offset_left = 8.0
+offset_top = 184.0
+offset_right = 424.0
+offset_bottom = 234.0
 theme = ExtResource("3_yhjph")
 theme_override_fonts/font = ExtResource("5_x8egy")
 theme_override_font_sizes/font_size = 28
 text = "Timer"
 horizontal_alignment = 1
 autowrap_mode = 3
+text_overrun_behavior = 5
+
+[node name="OffsetLabel" type="Label" parent="Control/Background/ShardScreen"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 28.0
+theme = ExtResource("3_yhjph")
+theme_override_fonts/font = ExtResource("5_x8egy")
+theme_override_font_sizes/font_size = 16
+text = "Offset"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="OffsetBox" type="SpinBox" parent="Control/Background/ShardScreen/OffsetLabel"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 20.0
+offset_right = 70.5625
+offset_bottom = 51.0
+max_value = 10.0
+rounded = true
 
 [node name="CloseButton" type="TextureButton" parent="Control/Background"]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)

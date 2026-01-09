@@ -30,13 +30,11 @@ func start_up():
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false
-func _input(event):
+func _input(_event):
 	if is_dragging:
 		var current_mouse_pos: Vector2 = DisplayServer.mouse_get_position()
 		var window_pos: Vector2 = current_mouse_pos - drag_offset
 		DisplayServer.window_set_position(window_pos)
-	if event.is_action_pressed("ui_accept"):
-		print(SkyEvents.shard_for(Time.get_datetime_string_from_system()))
 	
 func _on_drag_button_button_down() -> void:
 	is_dragging = true
