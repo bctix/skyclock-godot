@@ -117,6 +117,7 @@ offset_top = -160.0
 offset_right = 706.0
 offset_bottom = 629.0
 mouse_filter = 2
+metadata/unthemeable = true
 
 [node name="SubViewport" type="SubViewport" parent="Control/Panel/SubViewportContainer" unique_id=1544782950]
 transparent_bg = true
@@ -146,6 +147,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_7p5wc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ksrjk")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_mrjyg")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_eajnd")
+metadata/unthemeable = true
 
 [node name="Path2D" type="Path2D" parent="Control" unique_id=1237503257]
 visible = false

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cd0qd4t36cv8j"]
+
+[ext_resource type="Script" uid="uid://b2mhpbkgiix4s" path="res://Scenes/shard_map.gd" id="1_dujft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
+bg_color = Color(0, 0, 0, 0.6039216)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Curve2D" id="Curve2D_kipdf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, -10.34519, 0.14473927, 10.34519, -0.14473927, 24, 8, -14.518153, -3.6549196, 14.518153, 3.6549196, 648, 8, -0.6372615, 0, 0.6372615, 0, 664, 24, 0.29593515, -27.473019, -0.29593515, 27.473019, 664, 736, 0, 0, 0, 0, 640, 760, 23.756977, -0.101525545, -23.756977, 0.101525545, 32, 760, 0, 0, 0, 0, 8, 744, 0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 8, 24)
+}
+point_count = 10
+
+[node name="ShardMap" type="Window" unique_id=1790866683 node_paths=PackedStringArray("passthrough_path")]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(672, 762)
+script = ExtResource("1_dujft")
+id = "shard_map"
+passthrough_path = NodePath("Control/Path2D")
+
+[node name="Control" type="Control" parent="." unique_id=535822500]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="Panel" parent="Control" unique_id=2578896]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 664.0
+offset_bottom = 756.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3n4xg")
+
+[node name="Path2D" type="Path2D" parent="Control" unique_id=221893149]
+visible = false
+position = Vector2(0, -4)
+curve = SubResource("Curve2D_kipdf")

@@ -78,6 +78,7 @@ text = "Black Shard in Location at Realm"
 horizontal_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 5
+metadata/unthemeable = true
 
 [node name="ShardTimeInfo" type="Label" parent="Control/Background/ShardScreen" unique_id=1256039847]
 layout_mode = 0
@@ -136,10 +137,10 @@ texture_normal = ExtResource("3_x8egy")
 [node name="MapButton" type="TextureButton" parent="Control/Background" unique_id=1686251423]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
-offset_left = 392.0
-offset_top = 80.0
-offset_right = 416.0
-offset_bottom = 104.0
+offset_left = 112.0
+offset_top = 32.0
+offset_right = 136.0
+offset_bottom = 56.0
 texture_normal = ExtResource("8_yhjph")
 
 [node name="Path2D" type="Path2D" parent="Control" unique_id=2028862908]

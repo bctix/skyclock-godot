@@ -1,5 +1,7 @@
 extends CustomWindow
 
+var shard_window = preload("res://Scenes/shard_map.tscn")
+
 func _ready():
 	$Control.modulate.a = 0
 	$Control.position.x -= $Control.size.x
@@ -7,13 +9,7 @@ func _ready():
 	tween.set_parallel(true)
 	tween.tween_property($Control, "modulate:a", 1.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($Control, "position:x", 0.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	set_colors()
-	Config.value_changed.connect(conf_changed)
 	super()
-
-func conf_changed(section: String, key: String, _value) -> void:
-	if section == "global" and key == "color":
-		set_colors()
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false
@@ -35,7 +31,6 @@ func _on_close_button_pressed() -> void:
 	close()
 	pass # Replace with function body.
 
-func set_colors() -> void:
 	for node in $Control/Background.get_children():
 		if node is Label:
 			node.add_theme_color_override("font_color", Config.get_value("global", "color"))

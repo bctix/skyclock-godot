@@ -14,13 +14,8 @@ func _ready():
 	tween.tween_property($Control, "modulate:a", 1.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($Control, "position:y", 0.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	$Control/Background/version.text = "version: %s" % [ProjectSettings.get_setting("application/config/version")]
-	set_colors()
-	Config.value_changed.connect(conf_changed)
+	$Control/Background/color_label/ColorPickerButton.get_picker().picker_shape = ColorPicker.PickerShapeType.SHAPE_OKHSL_CIRCLE
 	super()
-
-func conf_changed(section: String, key: String, _value) -> void:
-	if section == "global" and key == "color":
-		set_colors()
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false
@@ -55,13 +50,6 @@ func _on_funnybutton_pressed() -> void:
 		WindowHandler.add_window("funny", funny_window_instance)
 		add_child(funny_window_instance)
 	pass # Replace with function body.
-
-func set_colors() -> void:
-	for node in $Control/Background.get_children():
-		if node is Label:
-			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
-		elif node is CanvasItem:
-			node.self_modulate = Config.get_value("global", "color")
 
 func _on_color_picker_button_color_changed(color: Color) -> void:
 	Config.set_value("global", "color", color)

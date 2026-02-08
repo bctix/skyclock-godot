@@ -6,13 +6,7 @@ var shard_window = preload("res://Scenes/shard_window.tscn")
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
 	start_up()
-	set_colors()
-	Config.value_changed.connect(conf_changed)
 	super()
-
-func conf_changed(section: String, key: String, _value) -> void:
-	if section == "global" and key == "color":
-		set_colors()
 
 func start_up():
 	%Control.modulate.a = 0
@@ -66,10 +60,3 @@ func _on_close_button_pressed() -> void:
 		await WindowHandler.close_all_windows()
 		get_tree().quit()
 	pass # Replace with function body.
-
-func set_colors() -> void:
-	for node in %Control.get_children():
-		if node is Label:
-			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
-		elif node is CanvasItem:
-			node.self_modulate = Config.get_value("global", "color")
