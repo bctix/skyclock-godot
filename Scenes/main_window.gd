@@ -7,6 +7,8 @@ func _ready():
 	get_tree().get_root().set_transparent_background(true)
 	start_up()
 	super()
+	add()
+	WindowHandler.set_root_window("main")
 
 func start_up():
 	%Control.modulate.a = 0
@@ -41,16 +43,16 @@ func _on_drag_button_button_up() -> void:
 
 func _on_settings_button_pressed() -> void:
 	if not WindowHandler.window_exists("extra"):
-		var extra_window_instance = extra_window.instantiate() as Window
+		var extra_window_instance = extra_window.instantiate() as CustomWindow
 		extra_window_instance.position = Vector2i(get_window().position.x, get_window().position.y - extra_window_instance.size.y)
-		add_child(extra_window_instance)
+		extra_window_instance.add()
 	pass
 
 func _on_shard_button_pressed() -> void:
 	if not WindowHandler.window_exists("shard"):
 		var shard_window_instance = shard_window.instantiate() as Window
 		shard_window_instance.position = Vector2i(get_window().position.x + shard_window_instance.size.x, get_window().position.y)
-		add_child(shard_window_instance)
+		shard_window_instance.add()
 	pass # Replace with function body.
 
 var closingapp = false

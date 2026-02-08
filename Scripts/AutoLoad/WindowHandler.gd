@@ -8,13 +8,23 @@ class WindowSlot:
 		window = w
 
 var windows:Array[WindowSlot] = []
+var root_window:Window
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+	
+func set_root_window(id: String) -> void:
+	var window = find_by_id(id)
+	root_window = window
+	print(root_window)
 
 func add_window(id:String, window: Window) -> void:
 	windows.push_front(WindowSlot.new(id,window))
+	print("yep....")
+	if root_window != null:
+		print("please????")
+		root_window.add_child(window)
 
 func close_window(id: String) -> Tween:
 	var window = find_by_id(id)
@@ -49,6 +59,3 @@ func find_by_id(id: String) -> Window:
 		if slot.id == id:
 			return slot.window
 	return null
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

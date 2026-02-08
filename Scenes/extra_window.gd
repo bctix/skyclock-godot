@@ -47,14 +47,12 @@ func _on_funnybutton_pressed() -> void:
 	if not WindowHandler.window_exists("funny"):
 		var funny_window_instance = funny_window.instantiate() as Window
 		funny_window_instance.position = Vector2i(get_window().position.x + funny_window_instance.size.x, get_window().position.y)
-		WindowHandler.add_window("funny", funny_window_instance)
-		add_child(funny_window_instance)
+		funny_window_instance.add()
 	pass # Replace with function body.
 
 func _on_color_picker_button_color_changed(color: Color) -> void:
 	Config.set_value("global", "color", color)
 	pass
-
 
 func _on_reset_color_pressed() -> void:
 	$Control/Background/color_label/ColorPickerButton.color = Color("#e5e3cf")
