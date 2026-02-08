@@ -17,13 +17,10 @@ func _ready() -> void:
 func set_root_window(id: String) -> void:
 	var window = find_by_id(id)
 	root_window = window
-	print(root_window)
 
 func add_window(id:String, window: Window) -> void:
 	windows.push_front(WindowSlot.new(id,window))
-	print("yep....")
 	if root_window != null:
-		print("please????")
 		root_window.add_child(window)
 
 func close_window(id: String) -> Tween:
