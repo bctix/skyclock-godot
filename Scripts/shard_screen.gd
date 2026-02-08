@@ -40,6 +40,7 @@ const lang = {
 }
 
 func _ready() -> void:
+	get_tree().get_root().set_transparent_background(true)
 	set_colors()
 	Config.value_changed.connect(conf_changed)
 
@@ -55,7 +56,10 @@ func _process(_delta):
 	
 	if not info.has_shard:
 		$ShardInfo.modulate = Color("ffffffff")
-		$ShardInfo.text = "There is no shard this day."
+		if $OffsetLabel/OffsetBox.value != 0:
+			$ShardInfo.text = "There is no shard this day."
+		else:
+			$ShardInfo.text = "There is no shard today."
 		$ShardTimeInfo.text = ""
 		return
 		

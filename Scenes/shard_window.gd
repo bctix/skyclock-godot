@@ -1,4 +1,4 @@
-extends Window
+extends CustomWindow
 
 func _ready():
 	$Control.modulate.a = 0
@@ -9,6 +9,7 @@ func _ready():
 	tween.tween_property($Control, "position:x", 0.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	set_colors()
 	Config.value_changed.connect(conf_changed)
+	super()
 
 func conf_changed(section: String, key: String, _value) -> void:
 	if section == "global" and key == "color":
@@ -30,14 +31,8 @@ func _on_drag_button_button_up() -> void:
 	is_dragging = false
 	drag_offset = Vector2.ZERO
 
-var closing = false
 func _on_close_button_pressed() -> void:
-	if not closing:
-		closing = true
-		var tween = create_tween()
-		tween.tween_property($Control, "modulate:a", 0.0, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		await tween.finished
-		self.queue_free()
+	close()
 	pass # Replace with function body.
 
 func set_colors() -> void:

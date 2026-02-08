@@ -8,18 +8,26 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="skyclock"
-config/version="1.2.0"
+config/version="1.3.0-dev"
 run/main_scene="uid://doe7wryx4acnb"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 config/icon="uid://cxgqgjeme710l"
 config/windows_native_icon="res://Assets/Images/IX Sky.ico"
+
+[audio]
+
+buses/default_bus_layout="uid://cxy1skc8g6cjh"
 
 [autoload]
 
@@ -27,6 +35,7 @@ SkyWax="*res://Scripts/AutoLoad/SkyWax.gd"
 Config="*res://Scripts/AutoLoad/Config.gd"
 Timezone="*res://Scripts/AutoLoad/Timezone.gd"
 SkyShard="*res://Scripts/AutoLoad/SkyShard.gd"
+WindowHandler="*uid://dq3awq83vsmte"
 
 [display]
 

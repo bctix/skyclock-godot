@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://doe7wryx4acnb"]
+[gd_scene format=3 uid="uid://doe7wryx4acnb"]
 
 [ext_resource type="Script" uid="uid://cf34ph7ujqlal" path="res://Scenes/main_window.gd" id="1_6t6yy"]
 [ext_resource type="StyleBox" uid="uid://dgxfwqw34l3e0" path="res://Themes/default_stylebox.tres" id="2_p20v8"]
@@ -12,6 +12,21 @@
 [ext_resource type="Texture2D" uid="uid://dvhxa2xgujwes" path="res://Assets/Images/right.svg" id="7_p20v8"]
 [ext_resource type="AudioStream" uid="uid://bxilnujaueoyi" path="res://Assets/Sounds/notif.mp3" id="7_xvkfb"]
 [ext_resource type="Texture2D" uid="uid://xsheoeofap12" path="res://Assets/Images/icons8-gear-32.png" id="8_p20v8"]
+
+[sub_resource type="Animation" id="Animation_hh1c1"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Background/flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_p8ock"]
 resource_name = "notif"
@@ -44,37 +59,38 @@ tracks/1/keys = {
 "values": [Color(0, 0, 0, 0), Color(1, 1, 1, 0.48235294), Color(0, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_hh1c1"]
-resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Background/flash:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_acqn6"]
 _data = {
 &"RESET": SubResource("Animation_hh1c1"),
 &"notif": SubResource("Animation_p8ock")
 }
 
-[node name="MainWindow" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_6t6yy")
+[sub_resource type="Curve2D" id="Curve2D_xvkfb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, -10.34519, 0.14473927, 10.34519, -0.14473927, 24, 8, -14.518153, -3.6549196, 14.518153, 3.6549196, 424, 8, 0, 0, 0, 0, 440, 24, 4.3655987, -18.376123, -4.3655987, 18.376123, 440, 232, 0, 0, 0, 0, 416, 248, 23.756977, -0.101525545, -23.756977, 0.101525545, 32, 248, 0, 0, 0, 0, 8, 232, 0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 8, 24)
+}
+point_count = 10
 
-[node name="Background" type="Panel" parent="."]
+[node name="MainWindow" type="Window" unique_id=1097521155 node_paths=PackedStringArray("passthrough_path")]
+transparent_bg = true
+oversampling_override = 1.0
+size = Vector2i(448, 256)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("1_6t6yy")
+id = "main"
+passthrough_path = NodePath("Control/Path2D")
+
+[node name="Control" type="Control" parent="." unique_id=656226341]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="Panel" parent="Control" unique_id=650154681]
 clip_children = 2
 clip_contents = true
 layout_mode = 0
@@ -84,20 +100,20 @@ offset_right = 440.0
 offset_bottom = 248.0
 theme_override_styles/panel = ExtResource("2_p20v8")
 
-[node name="flash" type="ColorRect" parent="Background"]
+[node name="flash" type="ColorRect" parent="Control/Background" unique_id=1524305509]
 clip_contents = true
 layout_mode = 0
 offset_right = 432.0
 offset_bottom = 240.0
 color = Color(0, 0, 0, 0)
 
-[node name="ClockScreen" type="Control" parent="."]
+[node name="ClockScreen" type="Control" parent="Control" unique_id=1229310003]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_36qhk")
 
-[node name="local_time_label" type="Label" parent="ClockScreen"]
+[node name="local_time_label" type="Label" parent="Control/ClockScreen" unique_id=127589064]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 88.0
@@ -110,7 +126,7 @@ theme_override_font_sizes/font_size = 48
 text = "00:00:00 PM"
 horizontal_alignment = 1
 
-[node name="sky_time_label" type="Label" parent="ClockScreen"]
+[node name="sky_time_label" type="Label" parent="Control/ClockScreen" unique_id=1938335566]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 147.0
@@ -123,7 +139,7 @@ theme_override_font_sizes/font_size = 33
 text = "00:00:00 PM"
 horizontal_alignment = 1
 
-[node name="next_event_label" type="Label" parent="ClockScreen"]
+[node name="next_event_label" type="Label" parent="Control/ClockScreen" unique_id=1793322606]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 201.0
@@ -136,7 +152,7 @@ theme_override_font_sizes/font_size = 28
 text = "time till event :D"
 horizontal_alignment = 1
 
-[node name="TitleLabel" type="Label" parent="ClockScreen"]
+[node name="TitleLabel" type="Label" parent="Control/ClockScreen" unique_id=878531822]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 16.0
@@ -147,15 +163,13 @@ theme_override_fonts/font = ExtResource("6_hh1c1")
 theme_override_font_sizes/font_size = 41
 text = "SkyClock"
 
-[node name="notif_animation" type="AnimationPlayer" parent="ClockScreen"]
-libraries = {
-&"": SubResource("AnimationLibrary_acqn6")
-}
+[node name="notif_animation" type="AnimationPlayer" parent="Control/ClockScreen" unique_id=212792586]
+libraries/ = SubResource("AnimationLibrary_acqn6")
 
-[node name="Notif" type="AudioStreamPlayer" parent="ClockScreen"]
+[node name="Notif" type="AudioStreamPlayer" parent="Control/ClockScreen" unique_id=141557600]
 bus = &"Notif"
 
-[node name="CloseButton" type="TextureButton" parent="."]
+[node name="CloseButton" type="TextureButton" parent="Control" unique_id=900363255]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 48.0
@@ -165,7 +179,7 @@ offset_bottom = 87.789474
 rotation = 3.1415927
 texture_normal = ExtResource("2_w45st")
 
-[node name="DragButton" type="TextureButton" parent="."]
+[node name="DragButton" type="TextureButton" parent="Control" unique_id=699349056]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 64.0
@@ -174,14 +188,14 @@ offset_right = 114.0
 offset_bottom = 66.0
 texture_normal = ExtResource("6_0s767")
 
-[node name="IxSvg" type="Sprite2D" parent="."]
+[node name="IxSvg" type="Sprite2D" parent="Control" unique_id=940513915]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 position = Vector2(316, 24.000004)
 rotation = 0.2617994
 scale = Vector2(0.019999998, 0.019999998)
 texture = ExtResource("7_kglov")
 
-[node name="SettingsButton" type="TextureButton" parent="."]
+[node name="SettingsButton" type="TextureButton" parent="Control" unique_id=1872009671]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 400.0
@@ -191,7 +205,7 @@ offset_bottom = 88.0
 rotation = -1.5707964
 texture_normal = ExtResource("8_p20v8")
 
-[node name="ShardButton" type="TextureButton" parent="."]
+[node name="ShardButton" type="TextureButton" parent="Control" unique_id=1373087430]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 384.0
@@ -200,8 +214,12 @@ offset_right = 432.0
 offset_bottom = 152.0
 texture_normal = ExtResource("7_p20v8")
 
-[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="button_down" from="DragButton" to="." method="_on_drag_button_button_down"]
-[connection signal="button_up" from="DragButton" to="." method="_on_drag_button_button_up"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="ShardButton" to="." method="_on_shard_button_pressed"]
+[node name="Path2D" type="Path2D" parent="Control" unique_id=1759037066]
+visible = false
+curve = SubResource("Curve2D_xvkfb")
+
+[connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="button_down" from="Control/DragButton" to="." method="_on_drag_button_button_down"]
+[connection signal="button_up" from="Control/DragButton" to="." method="_on_drag_button_button_up"]
+[connection signal="pressed" from="Control/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Control/ShardButton" to="." method="_on_shard_button_pressed"]

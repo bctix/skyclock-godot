@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0hw14vu1qnn7"]
+[gd_scene format=3 uid="uid://d0hw14vu1qnn7"]
 
 [ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="1_6yb74"]
 [ext_resource type="Texture2D" uid="uid://dohubpls5rx2l" path="res://Assets/Images/icons8-move-50.png" id="2_7p5wc"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="GDScript" id="GDScript_mrjyg"]
 resource_name = "yea"
-script/source = "extends Window
+script/source = "extends CustomWindow
 
 var spin_awesome = 0.0
 func _process(delta: float) -> void:
@@ -31,14 +31,8 @@ func _on_drag_button_button_up() -> void:
 	is_dragging = false
 	drag_offset = Vector2.ZERO
 
-var closing = false
 func _on_close_button_pressed() -> void:
-	if not closing:
-		closing = true
-		var tween = create_tween()
-		tween.tween_property($Control, \"modulate:a\", 0.0, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		await tween.finished
-		self.queue_free()
+	close()
 	pass # Replace with function body.
 
 func _on_button_pressed() -> void:
@@ -67,7 +61,13 @@ texture_filter = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eajnd"]
 
-[node name="Funny" type="Window"]
+[sub_resource type="Curve2D" id="Curve2D_6yb74"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, -10.34519, 0.14473927, 10.34519, -0.14473927, 24, 8, -14.518153, -3.6549196, 14.518153, 3.6549196, 424, 8, 0, 0, 0, 0, 440, 24, 4.3655987, -18.376123, -4.3655987, 18.376123, 440, 232, 0, 0, 0, 0, 416, 248, 23.756977, -0.101525545, -23.756977, 0.101525545, 32, 248, 0, 0, 0, 0, 8, 232, 0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 8, 24)
+}
+point_count = 10
+
+[node name="Funny" type="Window" unique_id=1962556980 node_paths=PackedStringArray("passthrough_path")]
 transparent_bg = true
 oversampling_override = 1.0
 size = Vector2i(448, 256)
@@ -75,14 +75,16 @@ borderless = true
 always_on_top = true
 transparent = true
 script = SubResource("GDScript_mrjyg")
+id = "funny"
+passthrough_path = NodePath("Control/Path2D")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1902960112]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 448.0
 offset_bottom = 256.0
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Control" unique_id=9088958]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -90,7 +92,7 @@ offset_right = 440.0
 offset_bottom = 248.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_eajnd")
 
-[node name="CloseButton" type="TextureButton" parent="Control/Panel"]
+[node name="CloseButton" type="TextureButton" parent="Control/Panel" unique_id=830576083]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 16.0
@@ -99,7 +101,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("1_6yb74")
 
-[node name="DragButton" type="TextureButton" parent="Control/Panel"]
+[node name="DragButton" type="TextureButton" parent="Control/Panel" unique_id=384505579]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 48.0
@@ -108,7 +110,7 @@ offset_right = 98.0
 offset_bottom = 58.0
 texture_normal = ExtResource("2_7p5wc")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/Panel"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/Panel" unique_id=537476945]
 layout_mode = 0
 offset_left = -56.0
 offset_top = -160.0
@@ -116,24 +118,24 @@ offset_right = 706.0
 offset_bottom = 629.0
 mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="Control/Panel/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Control/Panel/SubViewportContainer" unique_id=1544782950]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(530, 487)
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="Control/Panel/SubViewportContainer/SubViewport"]
+[node name="Node3D" type="Node3D" parent="Control/Panel/SubViewportContainer/SubViewport" unique_id=1869079201]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Control/Panel/SubViewportContainer/SubViewport/Node3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Control/Panel/SubViewportContainer/SubViewport/Node3D" unique_id=983347633]
 material_override = SubResource("StandardMaterial3D_7p5wc")
 
-[node name="Camera3D" type="Camera3D" parent="Control/Panel/SubViewportContainer/SubViewport/Node3D"]
+[node name="Camera3D" type="Camera3D" parent="Control/Panel/SubViewportContainer/SubViewport/Node3D" unique_id=1756936792]
 transform = Transform3D(0.75339353, -0.2858137, 0.5922067, 0.07514556, 0.9321206, 0.3542659, -0.6532621, -0.22239995, 0.7237313, 1.6004851, 1.2134349, 1.9907942)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Control/Panel/SubViewportContainer/SubViewport/Node3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Control/Panel/SubViewportContainer/SubViewport/Node3D" unique_id=1972439442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7360866, 1.3184927, 0.9620156)
 
-[node name="Button" type="Button" parent="Control/Panel"]
+[node name="Button" type="Button" parent="Control/Panel" unique_id=36334845]
 layout_mode = 0
 offset_left = 112.0
 offset_top = 24.0
@@ -144,6 +146,10 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_7p5wc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ksrjk")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_mrjyg")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_eajnd")
+
+[node name="Path2D" type="Path2D" parent="Control" unique_id=1237503257]
+visible = false
+curve = SubResource("Curve2D_6yb74")
 
 [connection signal="pressed" from="Control/Panel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Panel/DragButton" to="." method="_on_drag_button_button_down"]

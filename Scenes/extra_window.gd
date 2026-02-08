@@ -1,9 +1,9 @@
-extends Window
+extends CustomWindow
 
 var funny_window = preload("res://Scenes/funny.tscn")
-var funny_window_instance = null
 
 func _ready():
+	get_tree().get_root().set_transparent_background(true)
 	$Control.modulate.a = 0
 	$"Control/Background/24hr_label/24hr_toggle".button_pressed = Config.get_value("clock", "24h")
 	$Control/Background/notif_label/notif_toggle.button_pressed = Config.get_value("clock", "notifications")
@@ -16,6 +16,7 @@ func _ready():
 	$Control/Background/version.text = "version: %s" % [ProjectSettings.get_setting("application/config/version")]
 	set_colors()
 	Config.value_changed.connect(conf_changed)
+	super()
 
 func conf_changed(section: String, key: String, _value) -> void:
 	if section == "global" and key == "color":
@@ -37,14 +38,8 @@ func _on_drag_button_button_up() -> void:
 	is_dragging = false
 	drag_offset = Vector2.ZERO
 
-var closing = false
 func _on_close_button_pressed() -> void:
-	if not closing:
-		closing = true
-		var tween = create_tween()
-		tween.tween_property($Control, "modulate:a", 0.0, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		await tween.finished
-		self.queue_free()
+	close()
 	pass # Replace with function body.
 
 func _on_hr_toggle_toggled(toggled_on: bool) -> void:
@@ -54,9 +49,10 @@ func _on_notif_toggle_toggled(toggled_on: bool) -> void:
 	Config.set_value("clock", "notifications", toggled_on)
 
 func _on_funnybutton_pressed() -> void:
-	if funny_window_instance == null:
-		funny_window_instance = funny_window.instantiate()
-		funny_window_instance.position = Vector2i(get_window().position.x, get_window().position.y - funny_window_instance.size.y)
+	if not WindowHandler.window_exists("funny"):
+		var funny_window_instance = funny_window.instantiate() as Window
+		funny_window_instance.position = Vector2i(get_window().position.x + funny_window_instance.size.x, get_window().position.y)
+		WindowHandler.add_window("funny", funny_window_instance)
 		add_child(funny_window_instance)
 	pass # Replace with function body.
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1rbdxspv2ctm"]
+[gd_scene format=3 uid="uid://1rbdxspv2ctm"]
 
 [ext_resource type="Script" uid="uid://c2643dgay1q4g" path="res://Scenes/shard_window.gd" id="1_vk6mx"]
 [ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="2_5d4yk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="3_yhjph"]
 [ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="4_5d4yk"]
 [ext_resource type="FontFile" uid="uid://dgwowtscbpkq8" path="res://Assets/Fonts/Lato-Bold.ttf" id="5_x8egy"]
+[ext_resource type="Texture2D" uid="uid://cfbgbra4acq8d" path="res://Assets/Images/map.svg" id="8_yhjph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
 bg_color = Color(0, 0, 0, 0.6039216)
@@ -15,7 +16,13 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="ExtraWindow" type="Window"]
+[sub_resource type="Curve2D" id="Curve2D_yhjph"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, -10.34519, 0.14473927, 10.34519, -0.14473927, 24, 8, -14.518153, -3.6549196, 14.518153, 3.6549196, 424, 8, 0, 0, 0, 0, 440, 24, 4.3655987, -18.376123, -4.3655987, 18.376123, 440, 232, 0, 0, 0, 0, 416, 248, 23.756977, -0.101525545, -23.756977, 0.101525545, 32, 248, 0, 0, 0, 0, 8, 232, 0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 8, 24)
+}
+point_count = 10
+
+[node name="ShardWindow" type="Window" unique_id=241170616 node_paths=PackedStringArray("passthrough_path")]
 transparent_bg = true
 oversampling_override = 1.0
 title = "SkyExtras"
@@ -25,14 +32,16 @@ borderless = true
 always_on_top = true
 transparent = true
 script = ExtResource("1_vk6mx")
+id = "shard"
+passthrough_path = NodePath("Control/Path2D")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=862151465]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 448.0
 offset_bottom = 256.0
 
-[node name="Background" type="Panel" parent="Control"]
+[node name="Background" type="Panel" parent="Control" unique_id=2007001607]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -40,13 +49,13 @@ offset_right = 440.0
 offset_bottom = 248.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3n4xg")
 
-[node name="ShardScreen" type="Control" parent="Control/Background"]
+[node name="ShardScreen" type="Control" parent="Control/Background" unique_id=226113666]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_5esjx")
 
-[node name="TitleLabel" type="Label" parent="Control/Background/ShardScreen"]
+[node name="TitleLabel" type="Label" parent="Control/Background/ShardScreen" unique_id=708037127]
 layout_mode = 0
 offset_left = 142.0
 offset_top = 16.0
@@ -57,7 +66,7 @@ theme_override_fonts/font = ExtResource("4_5d4yk")
 theme_override_font_sizes/font_size = 41
 text = "SkyShard"
 
-[node name="ShardInfo" type="Label" parent="Control/Background/ShardScreen"]
+[node name="ShardInfo" type="Label" parent="Control/Background/ShardScreen" unique_id=2032576248]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 72.0
@@ -70,7 +79,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 5
 
-[node name="ShardTimeInfo" type="Label" parent="Control/Background/ShardScreen"]
+[node name="ShardTimeInfo" type="Label" parent="Control/Background/ShardScreen" unique_id=1256039847]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 184.0
@@ -84,7 +93,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 5
 
-[node name="OffsetLabel" type="Label" parent="Control/Background/ShardScreen"]
+[node name="OffsetLabel" type="Label" parent="Control/Background/ShardScreen" unique_id=1813408695]
 layout_mode = 0
 offset_left = 344.0
 offset_top = 8.0
@@ -97,7 +106,7 @@ text = "Offset"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="OffsetBox" type="SpinBox" parent="Control/Background/ShardScreen/OffsetLabel"]
+[node name="OffsetBox" type="SpinBox" parent="Control/Background/ShardScreen/OffsetLabel" unique_id=1391846679]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 20.0
@@ -106,7 +115,7 @@ offset_bottom = 51.0
 max_value = 10.0
 rounded = true
 
-[node name="CloseButton" type="TextureButton" parent="Control/Background"]
+[node name="CloseButton" type="TextureButton" parent="Control/Background" unique_id=1705480223]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 16.0
@@ -115,7 +124,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("2_5d4yk")
 
-[node name="DragButton" type="TextureButton" parent="Control/Background"]
+[node name="DragButton" type="TextureButton" parent="Control/Background" unique_id=742726063]
 self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
 layout_mode = 0
 offset_left = 48.0
@@ -123,6 +132,19 @@ offset_top = 8.0
 offset_right = 98.0
 offset_bottom = 58.0
 texture_normal = ExtResource("3_x8egy")
+
+[node name="MapButton" type="TextureButton" parent="Control/Background" unique_id=1686251423]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 392.0
+offset_top = 80.0
+offset_right = 416.0
+offset_bottom = 104.0
+texture_normal = ExtResource("8_yhjph")
+
+[node name="Path2D" type="Path2D" parent="Control" unique_id=2028862908]
+visible = false
+curve = SubResource("Curve2D_yhjph")
 
 [connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
