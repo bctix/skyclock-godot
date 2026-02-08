@@ -35,11 +35,11 @@ func set_colors() -> void:
 # https://www.reddit.com/r/godot/comments/40cm3w/looping_through_all_children_and_subchildren_of_a/
 # AayiramSooriyan
 func get_all_themeable_children(in_node,arr:=[]):
-	if in_node.has_meta("unthemeable"):
+	if not in_node.has_meta("unthemeable"):
+		arr.push_back(in_node)
+	else:
 		if not in_node.get_meta("unthemeable"):
 			arr.push_back(in_node)
 	for child in in_node.get_children():
-		if in_node.has_meta("unthemeable"):
-			if not in_node.get_meta("unthemeable"):
-				arr = get_all_themeable_children(child,arr)
+			arr = get_all_themeable_children(child,arr)
 	return arr
