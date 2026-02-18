@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://cd0qd4t36cv8j"]
 
 [ext_resource type="Script" uid="uid://b2mhpbkgiix4s" path="res://Scenes/shard_map.gd" id="1_dujft"]
+[ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="2_l2t5q"]
+[ext_resource type="Texture2D" uid="uid://dohubpls5rx2l" path="res://Assets/Images/icons8-move-50.png" id="3_oroqx"]
+[ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="4_1eht0"]
+[ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="5_k05sa"]
+[ext_resource type="FontFile" uid="uid://bt3trnspmwel0" path="res://Assets/Fonts/Lato-Regular.ttf" id="6_tdq6u"]
+[ext_resource type="FontFile" uid="uid://dgwowtscbpkq8" path="res://Assets/Fonts/Lato-Bold.ttf" id="7_oroqx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
 bg_color = Color(0, 0, 0, 0.6039216)
@@ -16,11 +22,15 @@ _data = {
 point_count = 10
 
 [node name="ShardMap" type="Window" unique_id=1790866683 node_paths=PackedStringArray("passthrough_path")]
+transparent_bg = true
 oversampling_override = 1.0
-position = Vector2i(0, 36)
-size = Vector2i(672, 762)
+size = Vector2i(673, 720)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
 script = ExtResource("1_dujft")
-id = "shard_map"
+id = "map"
 passthrough_path = NodePath("Control/Path2D")
 
 [node name="Control" type="Control" parent="." unique_id=535822500]
@@ -32,12 +42,113 @@ offset_bottom = 40.0
 [node name="Background" type="Panel" parent="Control" unique_id=2578896]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 4.0
+offset_top = 8.0
 offset_right = 664.0
-offset_bottom = 756.0
+offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3n4xg")
+
+[node name="CloseButton" type="TextureButton" parent="Control/Background" unique_id=510416307]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 87.78198
+offset_bottom = 87.789474
+rotation = 3.1415927
+texture_normal = ExtResource("2_l2t5q")
+
+[node name="DragButton" type="TextureButton" parent="Control/Background" unique_id=520575554]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 16.0
+offset_right = 114.0
+offset_bottom = 66.0
+texture_normal = ExtResource("3_oroqx")
+
+[node name="TitleLabel" type="Label" parent="Control/Background" unique_id=394393176]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 16.0
+offset_right = 414.0
+offset_bottom = 66.0
+theme = ExtResource("4_1eht0")
+theme_override_fonts/font = ExtResource("5_k05sa")
+theme_override_font_sizes/font_size = 41
+text = "SkyMap"
+
+[node name="LoadingText" type="Label" parent="Control/Background" unique_id=1354476179]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 312.0
+offset_right = 475.0
+offset_bottom = 420.0
+theme = ExtResource("4_1eht0")
+theme_override_fonts/font = ExtResource("6_tdq6u")
+theme_override_font_sizes/font_size = 69
+text = "loading..."
+horizontal_alignment = 1
+
+[node name="BrokeText" type="Label" parent="Control/Background" unique_id=454744102]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 408.0
+offset_right = 483.0
+offset_bottom = 516.0
+theme = ExtResource("4_1eht0")
+theme_override_fonts/font = ExtResource("6_tdq6u")
+theme_override_font_sizes/font_size = 21
+text = "or it broke idk..."
+horizontal_alignment = 1
+
+[node name="MapImage" type="TextureRect" parent="Control/Background" unique_id=1444942688]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 88.0
+offset_right = 624.0
+offset_bottom = 680.0
+metadata/unthemeable = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Control/Background/MapImage" unique_id=1022261532]
+unique_name_in_owner = true
+
+[node name="OffsetLabel" type="Label" parent="Control/Background" unique_id=543063997]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 16.0
+offset_right = 568.0
+offset_bottom = 36.0
+theme = ExtResource("4_1eht0")
+theme_override_fonts/font = ExtResource("7_oroqx")
+theme_override_font_sizes/font_size = 16
+text = "Offset"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="OffsetBox" type="SpinBox" parent="Control/Background/OffsetLabel" unique_id=427166529]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -16.0
+offset_top = 20.0
+offset_right = 70.5625
+offset_bottom = 51.0
+max_value = 10.0
+rounded = true
+
+[node name="DelayTimer" type="Timer" parent="Control/Background/OffsetLabel/OffsetBox" unique_id=2082837387]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
 
 [node name="Path2D" type="Path2D" parent="Control" unique_id=221893149]
 visible = false
 position = Vector2(0, -4)
 curve = SubResource("Curve2D_kipdf")
+
+[connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
+[connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
+[connection signal="request_completed" from="Control/Background/MapImage/HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="value_changed" from="Control/Background/OffsetLabel/OffsetBox" to="." method="_on_offset_box_value_changed"]
+[connection signal="timeout" from="Control/Background/OffsetLabel/OffsetBox/DelayTimer" to="." method="_on_delay_timer_timeout"]

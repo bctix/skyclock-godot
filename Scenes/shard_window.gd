@@ -36,3 +36,10 @@ func _on_close_button_pressed() -> void:
 			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
 		elif node is CanvasItem:
 			node.self_modulate = Config.get_value("global", "color")
+
+func _on_map_button_pressed() -> void:
+	if not WindowHandler.window_exists("map"):
+		var window_instance = shard_window.instantiate() as CustomWindow
+		window_instance.position = Vector2i(get_window().position.x, get_window().position.y - window_instance.size.y)
+		window_instance.add()
+	pass

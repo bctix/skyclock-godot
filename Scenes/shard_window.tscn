@@ -150,3 +150,4 @@ curve = SubResource("Curve2D_yhjph")
 [connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
 [connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
+[connection signal="pressed" from="Control/Background/MapButton" to="." method="_on_map_button_pressed"]
