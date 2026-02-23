@@ -16,9 +16,15 @@ func get_and_set_shard_image() -> void:
 	var current_time = Time.get_unix_time_from_system()
 	@warning_ignore("static_called_on_instance")
 	var info = SkyShard.get_shard_info(current_time + 86400 * %OffsetBox.value)
-	var url = "https://raw.githubusercontent.com/PlutoyDev/sky-shards/refs/heads/production/public/infographics/map_clement/%s.webp" % [info.map]
-	print("Requesting image...")
-	%HTTPRequest.request(url)
+	if info.has_shard:
+		$Control/Background/BrokeText.text = "or it broke idk..."
+		$Control/Background/LoadingText.visible = true
+		var url = "https://raw.githubusercontent.com/PlutoyDev/sky-shards/refs/heads/production/public/infographics/map_clement/%s.webp" % [info.map]
+		print("Requesting image...")
+		%HTTPRequest.request(url)
+	else:
+		$Control/Background/BrokeText.text = "There is no shard this day."
+		$Control/Background/LoadingText.visible = false
 
 func _on_http_request_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	var image = Image.new()

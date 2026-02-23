@@ -1,13 +1,30 @@
-extends CustomWindow
+extends Control
+
+@export var id: String = "main"
+@export var passthrough_path: Path2D
 
 var extra_window = preload("res://Scenes/extra_window.tscn")
 var shard_window = preload("res://Scenes/shard_window.tscn")
 
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
+	
+	var win = get_window()
+	win.transparent = true
+	win.borderless = true
+	win.always_on_top = true
+	win.unresizable = true
+	win.size = Vector2i(448,256)
+	
+	if passthrough_path:
+		win.mouse_passthrough_polygon = passthrough_path.curve.get_baked_points()
+
+	Config.value_changed.connect(conf_changed)
+	set_colors()
+	
 	start_up()
-	super()
-	add()
+	
+	WindowHandler.add_window(id, win, %Control)
 	WindowHandler.set_root_window("main")
 
 func start_up():
@@ -23,6 +40,27 @@ func start_up():
 	tween.tween_property(get_window(), "position:x", bottom_left_position.x, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(get_window(), "position:y", bottom_left_position.y, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
+	
+func conf_changed(section: String, key: String, _value) -> void:
+	if section == "global" and key == "color":
+		set_colors()
+
+func set_colors() -> void:
+	for node in get_all_themeable_children(self):
+		if node is Label:
+			node.add_theme_color_override("font_color", Config.get_value("global", "color"))
+		elif node is CanvasItem:
+			node.self_modulate = Config.get_value("global", "color")
+
+func get_all_themeable_children(in_node, arr := []):
+	if not in_node.has_meta("unthemeable"):
+		arr.push_back(in_node)
+	else:
+		if not in_node.get_meta("unthemeable"):
+			arr.push_back(in_node)
+	for child in in_node.get_children():
+		arr = get_all_themeable_children(child, arr)
+	return arr
 
 var drag_offset = Vector2.ZERO
 var is_dragging = false

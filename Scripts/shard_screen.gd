@@ -62,7 +62,7 @@ func _process(_delta):
 			$ShardInfo.text = "There is no shard today."
 		$ShardTimeInfo.text = ""
 		return
-		
+	
 	if info.is_red:
 		$ShardInfo.modulate = Color("d96f6f")
 	else:

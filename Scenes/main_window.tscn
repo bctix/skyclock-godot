@@ -71,21 +71,15 @@ _data = {
 }
 point_count = 10
 
-[node name="MainWindow" type="Window" unique_id=1097521155 node_paths=PackedStringArray("passthrough_path")]
-transparent_bg = true
-oversampling_override = 1.0
-size = Vector2i(448, 256)
-unresizable = true
-borderless = true
-always_on_top = true
-transparent = true
+[node name="MainWindow" type="Control" unique_id=987813729]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 448.0
+offset_bottom = 256.0
 script = ExtResource("1_6t6yy")
-id = "main"
-passthrough_path = NodePath("Control/Path2D")
 
 [node name="Control" type="Control" parent="." unique_id=656226341]
 unique_name_in_owner = true
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
