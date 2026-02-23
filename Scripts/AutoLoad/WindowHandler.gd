@@ -40,6 +40,7 @@ func close_window(id: String) -> Tween:
 	await tween.finished
 	if not slot.is_root:
 		slot.window.queue_free()
+		windows.remove_at(windows.find(slot))
 	return tween
 
 func close_all_windows() -> Tween:

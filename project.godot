@@ -42,7 +42,6 @@ WindowHandler="*uid://dq3awq83vsmte"
 window/size/viewport_width=448
 window/size/viewport_height=256
 window/size/initial_position_type=0
-window/size/initial_position=Vector2i(-4000, 0)
 window/size/resizable=false
 window/size/borderless=true
 window/size/always_on_top=true
@@ -52,6 +51,9 @@ window/per_pixel_transparency/allowed=true
 
 [rendering]
 
+gl_compatibility/driver.windows="opengl3_angle"
+gl_compatibility/driver.linuxbsd="opengl3_es"
+gl_compatibility/driver.macos="opengl3_angle"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 viewport/transparent_background=true

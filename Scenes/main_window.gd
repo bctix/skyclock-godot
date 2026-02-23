@@ -69,7 +69,7 @@ func _input(_event):
 		var current_mouse_pos: Vector2 = DisplayServer.mouse_get_position()
 		var window_pos: Vector2 = current_mouse_pos - drag_offset
 		#DisplayServer.window_set_position(window_pos)
-		position = window_pos
+		get_window().position = window_pos
 	
 func _on_drag_button_button_down() -> void:
 	is_dragging = true
