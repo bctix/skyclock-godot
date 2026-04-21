@@ -146,6 +146,25 @@ offset_top = 6.0
 offset_right = 172.0
 offset_bottom = 30.0
 
+[node name="dstoffset_label" type="Label" parent="Control/Background" unique_id=1933572584]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 81.0
+offset_right = 318.0
+offset_bottom = 113.0
+theme = ExtResource("4_tns7o")
+theme_override_fonts/font = ExtResource("7_3n4xg")
+theme_override_font_sizes/font_size = 26
+text = "DST Offset"
+horizontal_alignment = 1
+
+[node name="dstoffset_toggle" type="CheckButton" parent="Control/Background/dstoffset_label" unique_id=155299571]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 6.0
+offset_right = 172.0
+offset_bottom = 30.0
+
 [node name="version" type="Label" parent="Control/Background" unique_id=1413458663]
 layout_mode = 0
 offset_left = 12.0
@@ -220,6 +239,7 @@ curve = SubResource("Curve2D_hgq0r")
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
 [connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
 [connection signal="toggled" from="Control/Background/24hr_label/24hr_toggle" to="." method="_on_hr_toggle_toggled"]
+[connection signal="toggled" from="Control/Background/dstoffset_label/dstoffset_toggle" to="." method="_on_dstoffset_toggle_toggled"]
 [connection signal="pressed" from="Control/Background/funnybutton" to="." method="_on_funnybutton_pressed"]
 [connection signal="color_changed" from="Control/Background/color_label/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="pressed" from="Control/Background/color_label/reset_color" to="." method="_on_reset_color_pressed"]

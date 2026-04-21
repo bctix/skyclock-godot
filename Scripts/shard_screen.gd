@@ -49,7 +49,7 @@ func conf_changed(section: String, key: String, _value) -> void:
 		set_colors()
 
 func _process(_delta):
-	var current_time = Time.get_unix_time_from_system()
+	var current_time = Timezone.get_sky_unix_time_from_system()
 	
 	@warning_ignore("static_called_on_instance")
 	var info = SkyShard.get_shard_info(current_time + 86400 * offset_box.value)

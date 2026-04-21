@@ -56,6 +56,7 @@ var default_configuration: Dictionary = {
 	},
 	"clock": {
 		"24h": false,
-		"notifications": false
+		"notifications": false,
+		"isdst": false
 	},
 }

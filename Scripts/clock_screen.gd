@@ -25,7 +25,7 @@ var did_notif: bool = false
 func get_next_event_string() -> String:
 	var key = "geyser"
 	@warning_ignore("narrowing_conversion", "static_called_on_instance")
-	var ev = SkyWax.closest_event(Time.get_unix_time_from_system())
+	var ev = SkyWax.closest_event(Timezone.get_sky_unix_time_from_system())
 	
 	if 300 == ev.sec:
 		if not did_notif:
@@ -61,9 +61,7 @@ func get_sky_time_string() -> String:
 		var time = "%d:%02d:%02d" % [t.hour, t.minute, t.second]
 		return time
 	else:
-		var utc_unix = Time.get_unix_time_from_system()
-		var la_unix = utc_unix - 8 * 3600
-		var t = Time.get_datetime_dict_from_unix_time(int(la_unix))
+		var t = Timezone.get_sky_datetime_dict_from_unix_time(Time.get_unix_time_from_system())
 		var h = t.hour % 12
 		var suffix = "am" if t.hour < 12 else "pm"
 		if h == 0: h = 12
