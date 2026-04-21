@@ -8,7 +8,6 @@ func _ready():
 	$"Control/Background/24hr_label/24hr_toggle".button_pressed = Config.get_value("clock", "24h")
 	$Control/Background/notif_label/notif_toggle.button_pressed = Config.get_value("clock", "notifications")
 	$Control/Background/color_label/ColorPickerButton.color = Config.get_value("global", "color")
-	$Control/Background/dstoffset_label/dstoffset_toggle.button_pressed = Config.get_value("clock", "isdst")
 	$Control.position.y = $Control.size.y
 	var tween = create_tween()
 	tween.set_parallel(true)
@@ -59,7 +58,3 @@ func _on_reset_color_pressed() -> void:
 	$Control/Background/color_label/ColorPickerButton.color = Color("#e5e3cf")
 	Config.set_value("global", "color", $Control/Background/color_label/ColorPickerButton.color)
 	pass # Replace with function body.
-
-
-func _on_dstoffset_toggle_toggled(toggled_on: bool) -> void:
-	Config.set_value("clock", "isdst", toggled_on)
