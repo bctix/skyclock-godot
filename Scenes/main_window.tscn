@@ -124,14 +124,42 @@ horizontal_alignment = 1
 [node name="sky_time_label" type="Label" parent="Control/ClockScreen" unique_id=1938335566]
 layout_mode = 0
 offset_left = 120.0
-offset_top = 147.0
+offset_top = 154.0
 offset_right = 316.0
-offset_bottom = 188.0
+offset_bottom = 195.0
 pivot_offset = Vector2(150, 25)
 theme = ExtResource("4_xvkfb")
 theme_override_fonts/font = ExtResource("5_p8ock")
 theme_override_font_sizes/font_size = 33
 text = "00:00:00 PM"
+horizontal_alignment = 1
+
+[node name="sky_time_name" type="Label" parent="Control/ClockScreen" unique_id=284349944]
+modulate = Color(1, 1, 1, 0.47843137)
+layout_mode = 0
+offset_left = 185.0
+offset_top = 143.0
+offset_right = 241.0
+offset_bottom = 160.0
+pivot_offset = Vector2(150, 25)
+theme = ExtResource("4_xvkfb")
+theme_override_fonts/font = ExtResource("5_p8ock")
+theme_override_font_sizes/font_size = 14
+text = "Sky Time"
+horizontal_alignment = 1
+
+[node name="local_time_name" type="Label" parent="Control/ClockScreen" unique_id=2116149039]
+modulate = Color(1, 1, 1, 0.47843137)
+layout_mode = 0
+offset_left = 170.0
+offset_top = 73.0
+offset_right = 259.0
+offset_bottom = 97.0
+pivot_offset = Vector2(150, 25)
+theme = ExtResource("4_xvkfb")
+theme_override_fonts/font = ExtResource("5_p8ock")
+theme_override_font_sizes/font_size = 19
+text = "Local Time"
 horizontal_alignment = 1
 
 [node name="next_event_label" type="Label" parent="Control/ClockScreen" unique_id=1793322606]
