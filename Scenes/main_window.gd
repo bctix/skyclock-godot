@@ -2,6 +2,7 @@ extends Control
 
 @export var id: String = "main"
 @export var passthrough_path: Path2D
+@onready var shard_indicator = $Control/ShardButton/ShardIndicator
 
 var extra_window = preload("res://Scenes/extra_window.tscn")
 var shard_window = preload("res://Scenes/shard_window.tscn")
@@ -26,6 +27,19 @@ func _ready():
 	
 	WindowHandler.add_window(id, win, %Control)
 	WindowHandler.set_root_window("main")
+
+func _process(_elapsed):
+	var current_time = Timezone.get_sky_unix_time_from_system()
+	
+	@warning_ignore("static_called_on_instance")
+	var info = SkyShard.get_shard_info(current_time + 86400 * Globals.SHARD_OFFSET)
+	
+	shard_indicator.visible = info.has_shard
+	
+	if info.is_red:
+		shard_indicator.modulate = Color("d96f6f")
+	else:
+		shard_indicator.modulate = Color("ffffffff")
 
 func start_up():
 	%Control.modulate.a = 0

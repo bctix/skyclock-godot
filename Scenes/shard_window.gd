@@ -43,3 +43,9 @@ func _on_map_button_pressed() -> void:
 		window_instance.position = Vector2i(get_window().position.x, get_window().position.y - window_instance.size.y)
 		window_instance.add()
 	pass
+
+
+func _on_offset_box_value_changed(value: float) -> void:
+	@warning_ignore("narrowing_conversion")
+	Globals.set_shard_offset(value)
+	pass # Replace with function body.

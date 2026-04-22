@@ -36,6 +36,7 @@ Config="*res://Scripts/AutoLoad/Config.gd"
 Timezone="*res://Scripts/AutoLoad/Timezone.gd"
 SkyShard="*res://Scripts/AutoLoad/SkyShard.gd"
 WindowHandler="*uid://dq3awq83vsmte"
+Globals="*uid://mhqajtsy8t7p"
 
 [display]
 

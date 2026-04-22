@@ -6,7 +6,6 @@
 [ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="4_1eht0"]
 [ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="5_k05sa"]
 [ext_resource type="FontFile" uid="uid://bt3trnspmwel0" path="res://Assets/Fonts/Lato-Regular.ttf" id="6_tdq6u"]
-[ext_resource type="FontFile" uid="uid://dgwowtscbpkq8" path="res://Assets/Fonts/Lato-Bold.ttf" id="7_oroqx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4xg"]
 bg_color = Color(0, 0, 0, 0.6039216)
@@ -113,42 +112,18 @@ metadata/unthemeable = true
 [node name="HTTPRequest" type="HTTPRequest" parent="Control/Background/MapImage" unique_id=1022261532]
 unique_name_in_owner = true
 
-[node name="OffsetLabel" type="Label" parent="Control/Background" unique_id=543063997]
-layout_mode = 0
-offset_left = 520.0
-offset_top = 16.0
-offset_right = 568.0
-offset_bottom = 36.0
-theme = ExtResource("4_1eht0")
-theme_override_fonts/font = ExtResource("7_oroqx")
-theme_override_font_sizes/font_size = 16
-text = "Offset"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="OffsetBox" type="SpinBox" parent="Control/Background/OffsetLabel" unique_id=427166529]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = -16.0
-offset_top = 20.0
-offset_right = 70.5625
-offset_bottom = 51.0
-max_value = 10.0
-rounded = true
-
-[node name="DelayTimer" type="Timer" parent="Control/Background/OffsetLabel/OffsetBox" unique_id=2082837387]
-unique_name_in_owner = true
-wait_time = 0.5
-one_shot = true
-
 [node name="Path2D" type="Path2D" parent="Control" unique_id=221893149]
 visible = false
 position = Vector2(0, -4)
 curve = SubResource("Curve2D_kipdf")
 
+[node name="DelayTimer" type="Timer" parent="." unique_id=1291192446]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
 [connection signal="pressed" from="Control/Background/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="button_down" from="Control/Background/DragButton" to="." method="_on_drag_button_button_down"]
 [connection signal="button_up" from="Control/Background/DragButton" to="." method="_on_drag_button_button_up"]
 [connection signal="request_completed" from="Control/Background/MapImage/HTTPRequest" to="." method="_on_http_request_request_completed"]
-[connection signal="value_changed" from="Control/Background/OffsetLabel/OffsetBox" to="." method="_on_offset_box_value_changed"]
-[connection signal="timeout" from="Control/Background/OffsetLabel/OffsetBox/DelayTimer" to="." method="_on_delay_timer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]

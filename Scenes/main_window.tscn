@@ -209,6 +209,18 @@ offset_right = 432.0
 offset_bottom = 152.0
 texture_normal = ExtResource("7_p20v8")
 
+[node name="ShardIndicator" type="TextureButton" parent="Control/ShardButton" unique_id=1175043060]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 5.0
+offset_right = 61.0
+offset_bottom = 53.0
+scale = Vector2(0.795, 0.795)
+mouse_filter = 2
+texture_normal = ExtResource("7_p20v8")
+metadata/unthemeable = true
+
 [node name="Path2D" type="Path2D" parent="Control" unique_id=1759037066]
 visible = false
 curve = SubResource("Curve2D_xvkfb")

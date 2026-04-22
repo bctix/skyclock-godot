@@ -9,13 +9,22 @@ func _ready() -> void:
 	tween.tween_property($Control, "modulate:a", 1.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	#tween.tween_property($Control, "position:x", 0.0, 0.8).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	super()
+	Globals.SHARD_OFFSET_CHANGED.connect(func(): shard_offset_changed())
+	print("dud")
 	get_and_set_shard_image()
 	pass # Replace with function body.
+
+func shard_offset_changed():
+	print('erm')
+	%MapImage.visible = false
+	%DelayTimer.stop()
+	%DelayTimer.start()
+	pass
 
 func get_and_set_shard_image() -> void:
 	var current_time = Time.get_unix_time_from_system()
 	@warning_ignore("static_called_on_instance")
-	var info = SkyShard.get_shard_info(current_time + 86400 * %OffsetBox.value)
+	var info = SkyShard.get_shard_info(current_time + 86400 * Globals.SHARD_OFFSET)
 	if info.has_shard:
 		$Control/Background/BrokeText.text = "or it broke idk..."
 		$Control/Background/LoadingText.visible = true
@@ -65,11 +74,11 @@ func _on_close_button_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_offset_box_value_changed(_value: float) -> void:
-	%MapImage.visible = false
-	%DelayTimer.stop()
-	%DelayTimer.start()
-	pass # Replace with function body.
+#func _on_offset_box_value_changed(_value: float) -> void:
+	#%MapImage.visible = false
+	#%DelayTimer.stop()
+	#%DelayTimer.start()
+	#pass # Replace with function body.
 
 
 func _on_delay_timer_timeout() -> void:
