@@ -59,4 +59,7 @@ var default_configuration: Dictionary = {
 		"notifications": false,
 		"isdst": false
 	},
+	"extra": {
+		"clicker_score": 0
+	}
 }
