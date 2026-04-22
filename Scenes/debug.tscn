@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://bw8mu4gm0conx"]
+
+[ext_resource type="Texture2D" uid="uid://crfv8uyc2jumf" path="res://Assets/Images/x-mark-24.png" id="1_h47sb"]
+[ext_resource type="Texture2D" uid="uid://dohubpls5rx2l" path="res://Assets/Images/icons8-move-50.png" id="2_quvyc"]
+[ext_resource type="Theme" uid="uid://e05cfjppal74" path="res://Assets/Themes/Default.tres" id="3_6fqrn"]
+[ext_resource type="FontFile" uid="uid://cwk3vsfb0qprq" path="res://Assets/Fonts/Lato-BlackItalic.ttf" id="4_h47sb"]
+
+[sub_resource type="GDScript" id="GDScript_mrjyg"]
+resource_name = "yea"
+script/source = "extends CustomWindow
+
+
+func _ready() -> void:
+	super()
+
+func _process(_delta):
+	$Control/Panel/isdst/value.text = \"yes\" if Time.get_datetime_dict_from_system()[\"dst\"] else \"nah\"
+
+var drag_offset = Vector2.ZERO
+var is_dragging = false
+
+func _input(_event):
+	if is_dragging:
+		var current_mouse_pos: Vector2 = DisplayServer.mouse_get_position()
+		var window_pos: Vector2 = current_mouse_pos - drag_offset
+		self.position =  window_pos
+
+func _on_drag_button_button_down() -> void:
+	is_dragging = true
+	drag_offset = get_viewport().get_mouse_position()
+
+func _on_drag_button_button_up() -> void:
+	is_dragging = false
+	drag_offset = Vector2.ZERO
+
+func _on_close_button_pressed() -> void:
+	close()
+	pass # Replace with function body.
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eajnd"]
+bg_color = Color(0, 0, 0, 0.6039216)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Curve2D" id="Curve2D_6yb74"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, -10.34519, 0.14473927, 10.34519, -0.14473927, 24, 8, -14.518153, -3.6549196, 14.518153, 3.6549196, 424, 8, 0, 0, 0, 0, 440, 24, 4.3655987, -18.376123, -4.3655987, 18.376123, 440, 232, 0, 0, 0, 0, 416, 248, 23.756977, -0.101525545, -23.756977, 0.101525545, 32, 248, 0, 0, 0, 0, 8, 232, 0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 8, 24)
+}
+point_count = 10
+
+[node name="Debug" type="Window" unique_id=1962556980 node_paths=PackedStringArray("passthrough_path")]
+transparent_bg = true
+oversampling_override = 1.0
+size = Vector2i(448, 256)
+borderless = true
+always_on_top = true
+transparent = true
+script = SubResource("GDScript_mrjyg")
+id = "debug"
+passthrough_path = NodePath("Control/Path2D")
+
+[node name="Control" type="Control" parent="." unique_id=1902960112]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 448.0
+offset_bottom = 256.0
+
+[node name="Panel" type="Panel" parent="Control" unique_id=9088958]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 248.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eajnd")
+
+[node name="CloseButton" type="TextureButton" parent="Control/Panel" unique_id=830576083]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_h47sb")
+
+[node name="DragButton" type="TextureButton" parent="Control/Panel" unique_id=384505579]
+self_modulate = Color(0.8980392, 0.8901961, 0.8117647, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 98.0
+offset_bottom = 58.0
+texture_normal = ExtResource("2_quvyc")
+
+[node name="TitleLabel" type="Label" parent="Control/Panel" unique_id=683130501]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 8.0
+offset_right = 274.0
+offset_bottom = 58.0
+theme = ExtResource("3_6fqrn")
+theme_override_fonts/font = ExtResource("4_h47sb")
+theme_override_font_sizes/font_size = 41
+text = "Debug"
+
+[node name="isdst" type="Label" parent="Control/Panel" unique_id=1319853256]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 71.0
+offset_right = 105.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 24
+text = "Is DST?"
+
+[node name="value" type="Label" parent="Control/Panel/isdst" unique_id=755211309]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 6.0
+offset_right = 138.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 16
+text = "erm..."
+
+[node name="Path2D" type="Path2D" parent="Control" unique_id=1237503257]
+visible = false
+curve = SubResource("Curve2D_6yb74")
+
+[connection signal="pressed" from="Control/Panel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="button_down" from="Control/Panel/DragButton" to="." method="_on_drag_button_button_down"]
+[connection signal="button_up" from="Control/Panel/DragButton" to="." method="_on_drag_button_button_up"]

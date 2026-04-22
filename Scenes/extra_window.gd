@@ -1,6 +1,7 @@
 extends CustomWindow
 
 var funny_window = preload("res://Scenes/funny.tscn")
+var debug_window = preload("res://Scenes/debug.tscn")
 
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
@@ -57,4 +58,12 @@ func _on_color_picker_button_color_changed(color: Color) -> void:
 func _on_reset_color_pressed() -> void:
 	$Control/Background/color_label/ColorPickerButton.color = Color("#e5e3cf")
 	Config.set_value("global", "color", $Control/Background/color_label/ColorPickerButton.color)
+	pass # Replace with function body.
+
+
+func _on_debug_button_pressed() -> void:
+	if not WindowHandler.window_exists("debug"):
+		var debug_window_instance = debug_window.instantiate() as Window
+		debug_window_instance.position = Vector2i(get_window().position.x, get_window().position.y - debug_window_instance.size.y)
+		debug_window_instance.add()
 	pass # Replace with function body.
