@@ -22,9 +22,7 @@ func _ready():
 
 	Config.value_changed.connect(conf_changed)
 	set_colors()
-	
 	start_up()
-	
 	WindowHandler.add_window(id, win, %Control)
 	WindowHandler.set_root_window("main")
 
