@@ -1,5 +1,7 @@
 extends Control
 
+# im sorry for what you have to see in this
+
 @onready var offset_box: SpinBox = $OffsetLabel/OffsetBox
 
 const lang = {
@@ -54,13 +56,19 @@ func _process(_delta):
 	@warning_ignore("static_called_on_instance")
 	var info = SkyShard.get_shard_info(current_time + 86400 * Globals.SHARD_OFFSET)
 	
+	process_shard_info(info)
+	process_shard_time_info(info)
+	$ShardStatus.text = get_shard_status_string(current_time, info)
+
+func process_shard_info(info) -> void:
+	$ShardStatus.visible = info.has_shard
+	%ShardTimes.visible = info.has_shard
 	if not info.has_shard:
 		$ShardInfo.modulate = Color("ffffffff")
 		if $OffsetLabel/OffsetBox.value != 0:
 			$ShardInfo.text = "There is no shard this day."
 		else:
 			$ShardInfo.text = "There is no shard today."
-		$ShardTimeInfo.text = ""
 		return
 	
 	if info.is_red:
@@ -72,8 +80,43 @@ func _process(_delta):
 	
 	if info.is_red:
 		$ShardInfo.text = $ShardInfo.text + " giving %s red candles" % [str(info.reward_ac)]
-		
-	$ShardTimeInfo.text = get_shard_status_string(current_time, info)
+
+func process_shard_time_info(info) -> void:
+	var current_time = Time.get_unix_time_from_system() + 3600
+	
+	if not info.has_shard:
+		%ShardTimes.visible = false
+		return
+	else:
+		%ShardTimes.visible = true
+	
+	for i in range(3):
+		var occ = info.occurrences[i]
+		var land_time = format_to_time(occ.land)
+		var end_time = format_to_time(occ.end)
+		var has_ended = current_time >= occ.end
+		if i == 0:
+			$ShardTimes/FirstShardLabel/Strikethrough.visible = has_ended
+			$ShardTimes/FirstShardLabel/Time.text = "%s - %s" % [land_time, end_time]
+		elif i == 1:
+			$ShardTimes/SecondShardLabel/Strikethrough.visible = has_ended
+			$ShardTimes/SecondShardLabel/Time.text = "%s - %s" % [land_time, end_time]
+		elif i == 2:
+			$ShardTimes/ThirdShardLabel/Strikethrough.visible = has_ended
+			$ShardTimes/ThirdShardLabel/Time.text = "%s - %s" % [land_time, end_time]
+
+func format_to_time(unix_time) -> String:
+	var tz = Time.get_time_zone_from_system()
+	var local_unix = unix_time + tz.bias * 60
+	var t = Time.get_datetime_dict_from_unix_time(int(local_unix))
+	var h = t.hour
+	if Time.get_datetime_dict_from_system()["dst"]:
+		h = h - 1
+	var suffix = "am" if h < 12 else "pm"
+	h = h % 12
+	if h == 0: h = 12
+	var time = "%d:%02d:%02d %s" % [h, t.minute, t.second, suffix]
+	return time
 
 func get_shard_status_string(current_time, info) -> String:
 	if not info.has_shard:

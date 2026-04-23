@@ -101,7 +101,7 @@ func _on_settings_button_pressed() -> void:
 func _on_shard_button_pressed() -> void:
 	if not WindowHandler.window_exists("shard"):
 		var shard_window_instance = shard_window.instantiate() as Window
-		shard_window_instance.position = Vector2i(get_window().position.x + shard_window_instance.size.x, get_window().position.y)
+		shard_window_instance.position = Vector2i(get_window().position.x + size.x, get_window().position.y)
 		shard_window_instance.add()
 	pass # Replace with function body.
 

@@ -113,7 +113,6 @@ metadata/unthemeable = true
 unique_name_in_owner = true
 
 [node name="Path2D" type="Path2D" parent="Control" unique_id=221893149]
-visible = false
 position = Vector2(0, -4)
 curve = SubResource("Curve2D_kipdf")
 

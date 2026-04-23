@@ -2,6 +2,7 @@ extends CustomWindow
 
 var funny_window = preload("res://Scenes/funny.tscn")
 var debug_window = preload("res://Scenes/debug.tscn")
+var doom_window = preload("res://Scenes/doom.tscn")
 
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
@@ -45,11 +46,19 @@ func _on_notif_toggle_toggled(toggled_on: bool) -> void:
 	Config.set_value("clock", "notifications", toggled_on)
 
 func _on_funnybutton_pressed() -> void:
-	if not WindowHandler.window_exists("funny"):
-		var funny_window_instance = funny_window.instantiate() as Window
-		funny_window_instance.position = Vector2i(get_window().position.x + funny_window_instance.size.x, get_window().position.y)
-		funny_window_instance.add()
-	pass # Replace with function body.
+	if Input.is_key_pressed(KEY_ALT):
+		if not WindowHandler.window_exists("doom"):
+			var doom_window_instance = doom_window.instantiate() as Window
+			doom_window_instance.position = Vector2i(get_window().position.x, get_window().position.y + doom_window_instance.size.y)
+			doom_window_instance.add()
+		pass
+	else:
+		if not WindowHandler.window_exists("funny"):
+			var funny_window_instance = funny_window.instantiate() as Window
+			funny_window_instance.position = Vector2i(get_window().position.x + funny_window_instance.size.x, get_window().position.y)
+			funny_window_instance.add()
+		pass
+	pass
 
 func _on_color_picker_button_color_changed(color: Color) -> void:
 	Config.set_value("global", "color", color)
