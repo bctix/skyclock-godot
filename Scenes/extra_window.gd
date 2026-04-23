@@ -49,7 +49,7 @@ func _on_funnybutton_pressed() -> void:
 	if Input.is_key_pressed(KEY_ALT):
 		if not WindowHandler.window_exists("doom"):
 			var doom_window_instance = doom_window.instantiate() as Window
-			doom_window_instance.position = Vector2i(get_window().position.x, get_window().position.y + doom_window_instance.size.y)
+			doom_window_instance.position = Vector2i(get_window().position.x, get_window().position.y - doom_window_instance.size.y)
 			doom_window_instance.add()
 		pass
 	else:
